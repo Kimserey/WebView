@@ -17095,14 +17095,819 @@ var JSON;JSON||(JSON={}),function(){"use strict";function i(n){return n<10?"0"+n
 ;
 (function()
 {
- var Global=this,Runtime=this.IntelliFactory.Runtime,UI,Next,Doc,WebView,WebApp,Main;
+ var Global=this,Runtime=this.IntelliFactory.Runtime,UI,Next,AttrProxy,WebView,WebApp,Bootstrap,Hyperlink,Hyperlink1,List,Doc,T,Seq,AttrModule,PrintfHelpers,Unchecked,Strings,Common,Option,NavTabs,NavTab,NavTabs1,Table,Table1,TableBody,TableStyle,TableRow,TableRowStatus,Main;
  Runtime.Define(Global,{
   WebView:{
    WebApp:{
+    Bootstrap:{
+     Common:{
+      "attr.ariaControls.Static":function(x)
+      {
+       return AttrProxy.Create("aria-controls",x);
+      },
+      "attr.ariaExpanded.Static":function(x)
+      {
+       return AttrProxy.Create("aria-expanded",x);
+      },
+      "attr.ariaHidden.Static":function(x)
+      {
+       return AttrProxy.Create("aria-hidden",x);
+      },
+      "attr.ariaLabel.Static":function(x)
+      {
+       return AttrProxy.Create("aria-label",x);
+      },
+      "attr.dataTarget.Static":function(x)
+      {
+       return AttrProxy.Create("data-target",x);
+      },
+      "attr.dataToggle.Static":function(x)
+      {
+       return AttrProxy.Create("data-toggle",x);
+      },
+      "attr.role.Static":function()
+      {
+       return AttrProxy.Create("role","presentation");
+      }
+     },
+     Hyperlink:{
+      Hyperlink:Runtime.Class({
+       Render:function()
+       {
+        return Hyperlink1.Render(this);
+       },
+       WithAriaLabel:function(label)
+       {
+        var AriaLabel;
+        AriaLabel={
+         $:1,
+         $0:label
+        };
+        return Runtime.New(Hyperlink1,{
+         Action:this.Action,
+         Content:this.Content,
+         AriaLabel:AriaLabel,
+         Role:this.Role,
+         DataToggle:this.DataToggle,
+         Id:this.Id,
+         CssClass:this.CssClass,
+         Target:this.Target
+        });
+       },
+       WithDataToggle:function(toggle)
+       {
+        var DataToggle;
+        DataToggle={
+         $:1,
+         $0:toggle
+        };
+        return Runtime.New(Hyperlink1,{
+         Action:this.Action,
+         Content:this.Content,
+         AriaLabel:this.AriaLabel,
+         Role:this.Role,
+         DataToggle:DataToggle,
+         Id:this.Id,
+         CssClass:this.CssClass,
+         Target:this.Target
+        });
+       },
+       WithRole:function(role)
+       {
+        var Role;
+        Role={
+         $:1,
+         $0:role
+        };
+        return Runtime.New(Hyperlink1,{
+         Action:this.Action,
+         Content:this.Content,
+         AriaLabel:this.AriaLabel,
+         Role:Role,
+         DataToggle:this.DataToggle,
+         Id:this.Id,
+         CssClass:this.CssClass,
+         Target:this.Target
+        });
+       }
+      },{
+       AddClasses:function(cls,x)
+       {
+        var list,CssClass;
+        list=List.append(x.CssClass,cls);
+        CssClass=List.distinct(list);
+        return Runtime.New(Hyperlink1,{
+         Action:x.Action,
+         Content:x.Content,
+         AriaLabel:x.AriaLabel,
+         Role:x.Role,
+         DataToggle:x.DataToggle,
+         Id:x.Id,
+         CssClass:CssClass,
+         Target:x.Target
+        });
+       },
+       AddContent:function(content,x)
+       {
+        var Content;
+        Content={
+         $:0,
+         $0:content
+        };
+        return Runtime.New(Hyperlink1,{
+         Action:x.Action,
+         Content:Content,
+         AriaLabel:x.AriaLabel,
+         Role:x.Role,
+         DataToggle:x.DataToggle,
+         Id:x.Id,
+         CssClass:x.CssClass,
+         Target:x.Target
+        });
+       },
+       AddId:function(id,x)
+       {
+        var Id;
+        Id={
+         $:1,
+         $0:id
+        };
+        return Runtime.New(Hyperlink1,{
+         Action:x.Action,
+         Content:x.Content,
+         AriaLabel:x.AriaLabel,
+         Role:x.Role,
+         DataToggle:x.DataToggle,
+         Id:Id,
+         CssClass:x.CssClass,
+         Target:x.Target
+        });
+       },
+       AddTarget:function(target,x)
+       {
+        var Target;
+        Target={
+         $:1,
+         $0:target
+        };
+        return Runtime.New(Hyperlink1,{
+         Action:x.Action,
+         Content:x.Content,
+         AriaLabel:x.AriaLabel,
+         Role:x.Role,
+         DataToggle:x.DataToggle,
+         Id:x.Id,
+         CssClass:x.CssClass,
+         Target:Target
+        });
+       },
+       AddTextContent:function(content,x)
+       {
+        var Content;
+        Content={
+         $:1,
+         $0:content
+        };
+        return Runtime.New(Hyperlink1,{
+         Action:x.Action,
+         Content:Content,
+         AriaLabel:x.AriaLabel,
+         Role:x.Role,
+         DataToggle:x.DataToggle,
+         Id:x.Id,
+         CssClass:x.CssClass,
+         Target:x.Target
+        });
+       },
+       Create:function(action)
+       {
+        return Runtime.New(Hyperlink1,{
+         Action:action,
+         Content:{
+          $:0,
+          $0:Doc.get_Empty()
+         },
+         AriaLabel:{
+          $:0
+         },
+         Role:{
+          $:0
+         },
+         DataToggle:{
+          $:0
+         },
+         Id:{
+          $:0
+         },
+         CssClass:Runtime.New(T,{
+          $:0
+         }),
+         Target:{
+          $:0
+         }
+        });
+       },
+       Create1:function(action,content)
+       {
+        var arg10;
+        arg10=Hyperlink1.Create(action);
+        return Hyperlink1.AddTextContent(content,arg10);
+       },
+       Create2:function(action,content)
+       {
+        var arg10;
+        arg10=Hyperlink1.Create(action);
+        return Hyperlink1.AddContent(content,arg10);
+       },
+       Render:function(x)
+       {
+        var matchValue1,_3,txt,doc;
+        matchValue1=x.Content;
+        if(matchValue1.$==1)
+         {
+          txt=matchValue1.$0;
+          _3=Doc.TextNode(txt);
+         }
+        else
+         {
+          doc=matchValue1.$0;
+          _3=doc;
+         }
+        return Doc.Element("a",Seq.toList(Seq.delay(function()
+        {
+         var matchValue,_,action,subject,email,href;
+         matchValue=x.Action;
+         if(matchValue.$==2)
+          {
+           action=matchValue.$0;
+           _=List.ofArray([AttrProxy.Create("href","#"),AttrModule.Handler("click",function()
+           {
+            return function(ev)
+            {
+             ev.preventDefault();
+             return action(null);
+            };
+           })]);
+          }
+         else
+          {
+           if(matchValue.$==1)
+            {
+             subject=matchValue.$1;
+             email=matchValue.$0;
+             _=List.ofArray([AttrProxy.Create("href","mailto:"+PrintfHelpers.toSafe(email)+"?subject="+PrintfHelpers.toSafe(subject))]);
+            }
+           else
+            {
+             href=matchValue.$0;
+             _=List.ofArray([AttrProxy.Create("href",href)]);
+            }
+          }
+         return Seq.append(_,Seq.delay(function()
+         {
+          var _1,strings;
+          if(!Unchecked.Equals(x.CssClass,Runtime.New(T,{
+           $:0
+          })))
+           {
+            strings=x.CssClass;
+            _1=[AttrProxy.Create("class",Strings.concat(" ",strings))];
+           }
+          else
+           {
+            _1=Seq.empty();
+           }
+          return Seq.append(_1,Seq.delay(function()
+          {
+           var getOrEmpty,mapping,option;
+           getOrEmpty=function(opt)
+           {
+            var _2,x1;
+            if(opt.$==0)
+             {
+              _2=AttrProxy.get_Empty();
+             }
+            else
+             {
+              x1=opt.$0;
+              _2=x1;
+             }
+            return _2;
+           };
+           mapping=function(label)
+           {
+            return Common["attr.ariaLabel.Static"](label);
+           };
+           option=x.AriaLabel;
+           return Seq.append([getOrEmpty(Option.map(mapping,option))],Seq.delay(function()
+           {
+            var mapping1,option1;
+            mapping1=function(role)
+            {
+             return Common["attr.role.Static"](role);
+            };
+            option1=x.Role;
+            return Seq.append([getOrEmpty(Option.map(mapping1,option1))],Seq.delay(function()
+            {
+             var mapping2,option2;
+             mapping2=function(tog)
+             {
+              return Common["attr.dataToggle.Static"](tog);
+             };
+             option2=x.DataToggle;
+             return Seq.append([getOrEmpty(Option.map(mapping2,option2))],Seq.delay(function()
+             {
+              var mapping3,option3;
+              mapping3=function(i)
+              {
+               return AttrProxy.Create("id",i);
+              };
+              option3=x.Id;
+              return Seq.append([getOrEmpty(Option.map(mapping3,option3))],Seq.delay(function()
+              {
+               var mapping4,option4;
+               mapping4=function(i)
+               {
+                return AttrProxy.Create("target",i);
+               };
+               option4=x.Target;
+               return[getOrEmpty(Option.map(mapping4,option4))];
+              }));
+             }));
+            }));
+           }));
+          }));
+         }));
+        })),List.ofArray([_3]));
+       }
+      })
+     },
+     NavTabs:{
+      NavTab:Runtime.Class({
+       RenderContent:function()
+       {
+        return NavTab.RenderContent(this);
+       },
+       RenderNavItem:function()
+       {
+        return NavTab.RenderNavItem(this);
+       },
+       WithContent:function(doc)
+       {
+        return Runtime.New(NavTab,{
+         Id:this.Id,
+         Title:this.Title,
+         Content:doc,
+         NavTabState:this.NavTabState
+        });
+       }
+      },{
+       AddContent:function(content,x)
+       {
+        return Runtime.New(NavTab,{
+         Id:x.Id,
+         Title:x.Title,
+         Content:content,
+         NavTabState:x.NavTabState
+        });
+       },
+       Create:function(id,title)
+       {
+        return Runtime.New(NavTab,{
+         Id:id,
+         Title:title,
+         Content:Doc.get_Empty(),
+         NavTabState:{
+          $:0
+         }
+        });
+       },
+       Create1:function(id,title,content)
+       {
+        return Runtime.New(NavTab,{
+         Id:id,
+         Title:title,
+         Content:content,
+         NavTabState:{
+          $:0
+         }
+        });
+       },
+       Create2:function(id,title,state)
+       {
+        return Runtime.New(NavTab,{
+         Id:id,
+         Title:title,
+         Content:Doc.get_Empty(),
+         NavTabState:state
+        });
+       },
+       Create3:function(id,title,content,state)
+       {
+        return Runtime.New(NavTab,{
+         Id:id,
+         Title:title,
+         Content:content,
+         NavTabState:state
+        });
+       },
+       RenderContent:function(x)
+       {
+        var matchValue;
+        matchValue=x.NavTabState;
+        return Doc.Element("div",List.ofArray([Common["attr.role.Static"]("tabpanel"),AttrProxy.Create("id",x.Id),AttrProxy.Create("class",matchValue.$==1?"tab-pane fade in active":"tab-content tab-pane fade")]),List.ofArray([x.Content]));
+       },
+       RenderNavItem:function(x)
+       {
+        var ats,matchValue,matchValue1,_,arg0;
+        matchValue=x.NavTabState;
+        ats=List.ofArray([Common["attr.role.Static"]("presentation"),AttrProxy.Create("class",matchValue.$==1?"active":matchValue.$==2?"disabled":"")]);
+        matchValue1=x.NavTabState;
+        if(matchValue1.$==2)
+         {
+          _=Hyperlink1.Create1({
+           $:0,
+           $0:"#"
+          },x.Title);
+         }
+        else
+         {
+          arg0="#"+x.Id;
+          _=Hyperlink1.Create1({
+           $:0,
+           $0:arg0
+          },x.Title).WithRole("tab").WithDataToggle("tab");
+         }
+        return Doc.Element("li",ats,List.ofArray([_.Render()]));
+       },
+       SetState:function(state,x)
+       {
+        return Runtime.New(NavTab,{
+         Id:x.Id,
+         Title:x.Title,
+         Content:x.Content,
+         NavTabState:state
+        });
+       }
+      }),
+      NavTabs:Runtime.Class({},{
+       Create:function(tabs)
+       {
+        return Runtime.New(NavTabs1,{
+         Tabs:tabs,
+         NavTabType:{
+          $:0
+         },
+         IsJustified:false
+        });
+       },
+       Create1:function(tabs,navTabType)
+       {
+        return Runtime.New(NavTabs1,{
+         Tabs:tabs,
+         NavTabType:navTabType,
+         IsJustified:false
+        });
+       },
+       Render:function(x)
+       {
+        return[NavTabs1.RenderNav(x),NavTabs1.RenderContent(x)];
+       },
+       RenderContent:function(x)
+       {
+        var mapping,arg10,list,source;
+        mapping=function(arg00)
+        {
+         return NavTab.RenderContent(arg00);
+        };
+        arg10=List.ofArray([AttrProxy.Create("class","tab-content")]);
+        list=x.Tabs;
+        source=List.map(mapping,list);
+        return Doc.Element("div",arg10,source);
+       },
+       RenderNav:function(x)
+       {
+        var mapping,arg10,matchValue,list,source;
+        mapping=function(arg00)
+        {
+         return NavTab.RenderNavItem(arg00);
+        };
+        matchValue=x.NavTabType;
+        arg10=List.ofArray([AttrProxy.Create("class","nav "+(x.IsJustified?"nav-justified ":"")+(matchValue.$==1?matchValue.$0.$==1?"nav-pills nav-stacked":"nav-pills":"nav-tabs"))]);
+        list=x.Tabs;
+        source=List.map(mapping,list);
+        return Doc.Element("ul",arg10,source);
+       }
+      })
+     },
+     Table:{
+      Table:Runtime.Class({},{
+       AddHeaders:function(headers,x)
+       {
+        return Runtime.New(Table1,{
+         Headers:{
+          $:1,
+          $0:headers
+         },
+         Body:x.Body,
+         Style:x.Style
+        });
+       },
+       AddRow:function(row,x)
+       {
+        var arg10,Body;
+        arg10=x.Body;
+        Body=TableBody.AddRow(row,arg10);
+        return Runtime.New(Table1,{
+         Headers:x.Headers,
+         Body:Body,
+         Style:x.Style
+        });
+       },
+       AddRowDoc:function(rowData,x)
+       {
+        var arg10,Body;
+        arg10=x.Body;
+        Body=TableBody.AddRowDoc(rowData,arg10);
+        return Runtime.New(Table1,{
+         Headers:x.Headers,
+         Body:Body,
+         Style:x.Style
+        });
+       },
+       AddRowText:function(rowData,x)
+       {
+        var arg10,Body;
+        arg10=x.Body;
+        Body=TableBody.AddRowText(rowData,arg10);
+        return Runtime.New(Table1,{
+         Headers:x.Headers,
+         Body:Body,
+         Style:x.Style
+        });
+       },
+       AddRowTextWithStatus:function(rowData,status,x)
+       {
+        var arg20,Body;
+        arg20=x.Body;
+        Body=TableBody.AddRowTextWithStatus(rowData,status,arg20);
+        return Runtime.New(Table1,{
+         Headers:x.Headers,
+         Body:Body,
+         Style:x.Style
+        });
+       },
+       AddStyle:function(style,x)
+       {
+        return Runtime.New(Table1,{
+         Headers:x.Headers,
+         Body:x.Body,
+         Style:style
+        });
+       },
+       OnAfterRenderBody:function(action,x)
+       {
+        var inputRecord,OnAfterRenderAction,Body;
+        inputRecord=x.Body;
+        OnAfterRenderAction={
+         $:1,
+         $0:action
+        };
+        Body=Runtime.New(TableBody,{
+         Rows:inputRecord.Rows,
+         OnAfterRenderAction:OnAfterRenderAction
+        });
+        return Runtime.New(Table1,{
+         Headers:x.Headers,
+         Body:Body,
+         Style:x.Style
+        });
+       },
+       Render:function(x)
+       {
+        var ats,ats1,strings;
+        ats=List.ofArray([AttrProxy.Create("class","table-responsive")]);
+        strings=List.append(List.ofArray(["table"]),List.map(TableStyle.get_ToCssClass(),x.Style));
+        ats1=List.ofArray([AttrProxy.Create("class",Strings.concat(" ",strings))]);
+        return Doc.Element("div",ats,List.ofArray([Doc.Element("table",ats1,Seq.toList(Seq.delay(function()
+        {
+         var x1,mapping,matchValue,_,x2;
+         x1=x.Headers;
+         mapping=function(hs)
+         {
+          var arg20,mapping1,ch;
+          mapping1=function(h)
+          {
+           var arg201;
+           arg201=List.ofArray([Doc.TextNode(h)]);
+           return Doc.Element("th",[],arg201);
+          };
+          ch=List.map(mapping1,hs);
+          arg20=List.ofArray([Doc.Element("tr",[],ch)]);
+          return List.ofArray([Doc.Element("thead",[],arg20)]);
+         };
+         matchValue=Option.map(mapping,x1);
+         if(matchValue.$==0)
+          {
+           _=Runtime.New(T,{
+            $:0
+           });
+          }
+         else
+          {
+           x2=matchValue.$0;
+           _=x2;
+          }
+         return Seq.append(_,Seq.delay(function()
+         {
+          var arg00;
+          arg00=x.Body;
+          return[TableBody.Render(arg00)];
+         }));
+        })))]));
+       },
+       get_Empty:function()
+       {
+        return Runtime.New(Table1,{
+         Headers:{
+          $:0
+         },
+         Body:TableBody.get_Empty(),
+         Style:Runtime.New(T,{
+          $:0
+         })
+        });
+       }
+      }),
+      TableBody:Runtime.Class({},{
+       AddRow:function(row,x)
+       {
+        return Runtime.New(TableBody,{
+         Rows:List.append(x.Rows,List.ofArray([row])),
+         OnAfterRenderAction:x.OnAfterRenderAction
+        });
+       },
+       AddRowDoc:function(rowData,x)
+       {
+        return Runtime.New(TableBody,{
+         Rows:List.append(x.Rows,List.ofArray([Runtime.New(TableRow,{
+          Status:Runtime.New(TableRowStatus,{
+           $:0
+          }),
+          Data:rowData
+         })])),
+         OnAfterRenderAction:x.OnAfterRenderAction
+        });
+       },
+       AddRowText:function(rowData,x)
+       {
+        var mapping,arg00;
+        mapping=function(i)
+        {
+         return Doc.TextNode(i);
+        };
+        arg00=List.map(mapping,rowData);
+        return TableBody.AddRowDoc(arg00,x);
+       },
+       AddRowTextWithStatus:function(rowData,status,x)
+       {
+        var mapping;
+        mapping=function(i)
+        {
+         return Doc.TextNode(i);
+        };
+        return Runtime.New(TableBody,{
+         Rows:List.append(x.Rows,List.ofArray([Runtime.New(TableRow,{
+          Status:status,
+          Data:List.map(mapping,rowData)
+         })])),
+         OnAfterRenderAction:x.OnAfterRenderAction
+        });
+       },
+       Render:function(x)
+       {
+        var mapping,option,matchValue,ats,_,x1,mapping1,list,source;
+        mapping=function(action)
+        {
+         return List.ofArray([AttrModule.OnAfterRender(action)]);
+        };
+        option=x.OnAfterRenderAction;
+        matchValue=Option.map(mapping,option);
+        if(matchValue.$==0)
+         {
+          _=Runtime.New(T,{
+           $:0
+          });
+         }
+        else
+         {
+          x1=matchValue.$0;
+          _=x1;
+         }
+        ats=_;
+        mapping1=function(arg00)
+        {
+         return TableRow.Render(arg00);
+        };
+        list=x.Rows;
+        source=List.map(mapping1,list);
+        return Doc.Element("tbody",ats,source);
+       },
+       get_Empty:function()
+       {
+        return Runtime.New(TableBody,{
+         Rows:Runtime.New(T,{
+          $:0
+         }),
+         OnAfterRenderAction:{
+          $:0
+         }
+        });
+       }
+      }),
+      TableRow:Runtime.Class({},{
+       AddData:function(data,x)
+       {
+        return Runtime.New(TableRow,{
+         Status:x.Status,
+         Data:data
+        });
+       },
+       Render:function(x)
+       {
+        var mapping,list;
+        mapping=function(d)
+        {
+         var arg20;
+         arg20=List.ofArray([d]);
+         return Doc.Element("td",[],arg20);
+        };
+        list=x.Data;
+        return Doc.Element("tr",List.ofArray([AttrProxy.Create("class",Global.String(x.Status))]),List.map(mapping,list));
+       },
+       SetStatus:function(status,x)
+       {
+        return Runtime.New(TableRow,{
+         Status:status,
+         Data:x.Data
+        });
+       },
+       get_Empty:function()
+       {
+        return Runtime.New(TableRow,{
+         Status:Runtime.New(TableRowStatus,{
+          $:0
+         }),
+         Data:Runtime.New(T,{
+          $:0
+         })
+        });
+       }
+      }),
+      TableRowStatus:Runtime.Class({
+       toString:function()
+       {
+        return this.$==1?"active":this.$==2?"success":this.$==3?"warning":this.$==4?"danger":this.$==5?"info":"";
+       }
+      }),
+      TableStyle:Runtime.Class({},{
+       get_ToCssClass:function()
+       {
+        return function(_arg1)
+        {
+         return _arg1.$==1?"table-striped":_arg1.$==2?"table-hover":"table-bordered";
+        };
+       }
+      })
+     }
+    },
     Main:{
      main:Runtime.Field(function()
      {
-      return Doc.RunById("main",Doc.TextNode("Hello world"));
+      var x,x1,arg00,x2,x3,x4,x5,arg001,x6,arg002,shopsTab,x7,x8,arg003,x9,xa,xb,xc,patternInput,arg20;
+      x=NavTab.Create("shops","Shops");
+      x1=Table1.get_Empty();
+      arg00=List.ofArray(["#","Name","Location","Category"]);
+      x2=Table1.AddHeaders(arg00,x1);
+      x3=Table1.AddRowText(List.ofArray(["1","Waitrose","London","Supermarket"]),x2);
+      x4=Table1.AddRowText(List.ofArray(["2","Waitrose","London","Supermarket"]),x3);
+      x5=Table1.AddRowText(List.ofArray(["3","Waitrose","London","Supermarket"]),x4);
+      arg001=Table1.Render(Table1.AddRowText(List.ofArray(["4","Waitrose","London","Supermarket"]),x5));
+      x6=NavTab.AddContent(arg001,x);
+      arg002={
+       $:1
+      };
+      shopsTab=NavTab.SetState(arg002,x6);
+      x7=NavTab.Create("expenses","Expenses");
+      x8=Table1.get_Empty();
+      arg003=List.ofArray(["#","Name","Location","Category","Price"]);
+      x9=Table1.AddHeaders(arg003,x8);
+      xa=Table1.AddRowText(List.ofArray(["1","Bread","London","Supermarket","$1"]),x9);
+      xb=Table1.AddRowText(List.ofArray(["2","Bread","London","Supermarket","$1"]),xa);
+      xc=Table1.AddRowText(List.ofArray(["3","Bread","London","Supermarket","$1"]),xb);
+      patternInput=NavTabs1.Render(NavTabs1.Create(List.ofArray([shopsTab,NavTab.AddContent(Table1.Render(Table1.AddRowText(List.ofArray(["4","Bread","London","Supermarket","$1"]),xc)),x7)])));
+      arg20=List.ofArray([patternInput[0],patternInput[1]]);
+      return Doc.RunById("main",Doc.Element("div",[],arg20));
      })
     }
    }
@@ -17112,9 +17917,31 @@ var JSON;JSON||(JSON={}),function(){"use strict";function i(n){return n<10?"0"+n
  {
   UI=Runtime.Safe(Global.WebSharper.UI);
   Next=Runtime.Safe(UI.Next);
-  Doc=Runtime.Safe(Next.Doc);
+  AttrProxy=Runtime.Safe(Next.AttrProxy);
   WebView=Runtime.Safe(Global.WebView);
   WebApp=Runtime.Safe(WebView.WebApp);
+  Bootstrap=Runtime.Safe(WebApp.Bootstrap);
+  Hyperlink=Runtime.Safe(Bootstrap.Hyperlink);
+  Hyperlink1=Runtime.Safe(Hyperlink.Hyperlink);
+  List=Runtime.Safe(Global.WebSharper.List);
+  Doc=Runtime.Safe(Next.Doc);
+  T=Runtime.Safe(List.T);
+  Seq=Runtime.Safe(Global.WebSharper.Seq);
+  AttrModule=Runtime.Safe(Next.AttrModule);
+  PrintfHelpers=Runtime.Safe(Global.WebSharper.PrintfHelpers);
+  Unchecked=Runtime.Safe(Global.WebSharper.Unchecked);
+  Strings=Runtime.Safe(Global.WebSharper.Strings);
+  Common=Runtime.Safe(Bootstrap.Common);
+  Option=Runtime.Safe(Global.WebSharper.Option);
+  NavTabs=Runtime.Safe(Bootstrap.NavTabs);
+  NavTab=Runtime.Safe(NavTabs.NavTab);
+  NavTabs1=Runtime.Safe(NavTabs.NavTabs);
+  Table=Runtime.Safe(Bootstrap.Table);
+  Table1=Runtime.Safe(Table.Table);
+  TableBody=Runtime.Safe(Table.TableBody);
+  TableStyle=Runtime.Safe(Table.TableStyle);
+  TableRow=Runtime.Safe(Table.TableRow);
+  TableRowStatus=Runtime.Safe(Table.TableRowStatus);
   return Main=Runtime.Safe(WebApp.Main);
  });
  Runtime.OnLoad(function()
