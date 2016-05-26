@@ -41,7 +41,11 @@
     <WarningLevel>3</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Client.fs" />
+    <None Include="Resources\jquery-1.12.4.min.js" />
+    <None Include="Resources\style.css" />
+    <None Include="Resources\materialize.min.css" />
+    <None Include="Resources\materialize.min.js" />
+    <Compile Include="Main.fs" />
     <Content Include="index.html" />
     <Content Include="Web.config" />
     <Content Include="Global.asax" />

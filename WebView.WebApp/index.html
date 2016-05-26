@@ -1,24 +1,35 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <title>WebView.WebApp</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="Content/WebView.WebApp.css" />
-    <script type="text/javascript" src="Content/WebView.WebApp.head.js"></script>
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="materialize/css/materialize.min.css" type="text/css" rel="stylesheet">
+    <link href="Resources/style.css" type="text/css" rel="stylesheet">
+
+    <script src="Resources/jquery-1.12.4.min.js" type="text/javascript"></script>
+    <script src="materialize/js/materialize.min.js" type="text/javascript"></script>
 </head>
 <body>
-    <h1>My list of unique people</h1>
-    <div id="main" data-children-template="Main">
-        <ul data-hole="ListContainer">
-            <li data-template="ListItem">$!{Name}</li>
+    <nav>
+        <ul class="right hide-on-med-and-down">
+            <li><a href="#!">First Sidebar Link</a></li>
+            <li><a href="#!">Second Sidebar Link</a></li>
         </ul>
-        <div>
-            <input data-var="Name" placeholder="Name" />
-            <button data-event-click="Add">Add</button>
-            <div>You are about to add: $!{Name}</div>
-        </div>
-    </div>
+        <ul id="slide-out" class="side-nav">
+            <li><a href="#!">First Sidebar Link</a></li>
+            <li><a href="#!">Second Sidebar Link</a></li>
+        </ul>
+        <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+    </nav>
+    <div id="main"></div>
     <script type="text/javascript" src="Content/WebView.WebApp.min.js"></script>
+    <script type="text/javascript">
+        $('.button-collapse').sideNav({
+            menuWidth: 300, // Default is 240
+            closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
+        });
+    </script>
 </body>
 </html>
