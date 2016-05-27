@@ -4,8 +4,13 @@ open Xamarin.Forms
 
 module WebView =
     
-    let content =
-        new ContentPage(Content = new Label(Text = "Hello world"))
+    let view = 
+        new WebView(Source = 
+            new HtmlWebViewSource(Html = 
+                """<html><body>
+                   <h1>Xamarin.Forms</h1>
+                   <p>Welcome to WebView.</p>
+                   </body></html>"""))
     
     type App() = 
-        inherit Application(MainPage = content)
+        inherit Application(MainPage = new ContentPage(Content = view))
