@@ -6,8 +6,7 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 
-namespace WebView.Mobile.AndroidApp
-{
+namespace WebView.Mobile.AndroidApp {
     [Activity(Label = "WebView.Mobile.AndroidApp", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Xamarin.Forms.Platform.Android.FormsApplicationActivity
     {
