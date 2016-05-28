@@ -52,6 +52,9 @@
     <Compile Include="AssemblyInfo.fs" />
     <Compile Include="View.fs" />
     <Content Include="packages.config" />
+    <None Include="..\WebView.WebApp\index.html">
+      <Link>index.html</Link>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FSharp.Core">

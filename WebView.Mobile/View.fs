@@ -8,24 +8,9 @@ open Xamarin.Forms
 type IBaseUrl =
     abstract member Get: unit -> string
         
-module View =
-    let baseUrl =
-        DependencyService.Get<IBaseUrl>().Get()
-        
-    let htmlSource =
-        new HtmlWebViewSource(Html = """ <html><body>hello world</body></html> """, BaseUrl = baseUrl)
+type View() =
+    inherit ContentPage(Content = new WebView(Source = new HtmlWebViewSource(Html = (new StreamReader(typeof<View>.GetTypeInfo().Assembly.GetManifestResourceStream("WebView.Mobile.index.html"))).ReadToEnd(), BaseUrl = DependencyService.Get<IBaseUrl>().Get())))
 
-    let view = 
-        new WebView(Source = htmlSource)
 
-    let stackLayout =
-        let l = new StackLayout()
-        l.Children.Add view
-        l.Children.Add (new Label(Text = (typeof<WebView>.GetTypeInfo().Assembly.GetManifestResourceNames() |> String.concat " ")))
-        l
-
-    let content =
-        new ContentPage(Content = new Label(Text = (typeof<WebView>.GetTypeInfo().Assembly.GetManifestResourceNames() |> Array.append [| "hehe" |] |> String.concat " ")))
-    
-    type App() = 
-        inherit Application(MainPage = content)
+type App() = 
+    inherit Application(MainPage = new View())

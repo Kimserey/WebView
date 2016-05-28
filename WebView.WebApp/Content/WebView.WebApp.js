@@ -17884,7 +17884,7 @@ var JSON;JSON||(JSON={}),function(){"use strict";function i(n){return n<10?"0"+n
     Main:{
      main:Runtime.Field(function()
      {
-      var x,x1,x2,x3,x4,arg00,x5,arg001,shopsTab,x6,x7,arg002,x8,x9,xa,xb,patternInput,arg20;
+      var x,x1,x2,x3,x4,arg00,x5,arg001,shopsTab,x6,x7,x8,x9,patternInput,arg20;
       x=NavTab.Create("shops","Shops");
       x1=Table1.get_Empty();
       x2=Table1.AddHeaders(List.ofArray(["#","Name","Location","Category"]),x1);
@@ -17898,12 +17898,9 @@ var JSON;JSON||(JSON={}),function(){"use strict";function i(n){return n<10?"0"+n
       shopsTab=NavTab.SetState(arg001,x5);
       x6=NavTab.Create("expenses","Expenses");
       x7=Table1.get_Empty();
-      arg002=List.ofArray(["#","Name","Location","Category","Price"]);
-      x8=Table1.AddHeaders(arg002,x7);
+      x8=Table1.AddHeaders(List.ofArray(["#","Name","Location","Category","Price"]),x7);
       x9=Table1.AddRowText(List.ofArray(["1","Bread","London","Supermarket","$1"]),x8);
-      xa=Table1.AddRowText(List.ofArray(["2","Coffee","London","Supermarket","$1"]),x9);
-      xb=Table1.AddRowText(List.ofArray(["3","c","London","Supermarket","$1"]),xa);
-      patternInput=NavTabs1.Render(NavTabs1.Create(List.ofArray([shopsTab,NavTab.AddContent(Table1.Render(Table1.AddRowText(List.ofArray(["4","Bread","London","Supermarket","$1"]),xb)),x6)])));
+      patternInput=NavTabs1.Render(NavTabs1.Create(List.ofArray([shopsTab,NavTab.AddContent(Table1.Render(Table1.AddRowText(List.ofArray(["2","Coffee","London","Supermarket","$1"]),x9)),x6)])));
       arg20=List.ofArray([patternInput[0],patternInput[1]]);
       return Doc.RunById("main",Doc.Element("div",[],arg20));
      })

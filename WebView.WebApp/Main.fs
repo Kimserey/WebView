@@ -34,8 +34,6 @@ module Main =
             |> Table.AddHeaders [ "#"; "Name"; "Location"; "Category"; "Price" ]
             |> Table.AddRowText [ "1"; "Bread"; "London"; "Supermarket"; "$1" ]
             |> Table.AddRowText [ "2"; "Coffee"; "London"; "Supermarket"; "$1" ]
-            |> Table.AddRowText [ "3"; "c"; "London"; "Supermarket"; "$1" ]
-            |> Table.AddRowText [ "4"; "Bread"; "London"; "Supermarket"; "$1" ]
             |> Table.Render
 
         let expensesTab =

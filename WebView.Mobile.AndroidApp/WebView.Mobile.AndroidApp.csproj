@@ -195,6 +195,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\WebView.CSharp.Test\WebView.CSharp.Test.csproj">
+      <Project>{5ed6aaec-b34e-4116-ba97-f54163de290d}</Project>
+      <Name>WebView.CSharp.Test</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WebView.Mobile\WebView.Mobile.fsproj">
       <Project>{03dd84cb-c012-47fb-983b-ebd09ee230f0}</Project>
       <Name>WebView.Mobile</Name>
