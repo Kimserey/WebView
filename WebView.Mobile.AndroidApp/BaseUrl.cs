@@ -2,10 +2,10 @@
 using Xamarin.Forms;
 using WebView.Mobile.AndroidApp;
 
-[assembly: Dependency(typeof(BaseUrl_Android))]
+[assembly: Dependency(typeof(BaseUrl))]
 namespace WebView.Mobile.AndroidApp
 {
-    public class BaseUrl_Android : WebView.Mobile.Core.IBaseUrl
+    public class BaseUrl : WebView.Mobile.IBaseUrl
     {
         public string Get()
         {

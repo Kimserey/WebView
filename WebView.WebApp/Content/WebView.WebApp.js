@@ -17884,28 +17884,26 @@ var JSON;JSON||(JSON={}),function(){"use strict";function i(n){return n<10?"0"+n
     Main:{
      main:Runtime.Field(function()
      {
-      var x,x1,arg00,x2,x3,x4,x5,arg001,x6,arg002,shopsTab,x7,x8,arg003,x9,xa,xb,xc,patternInput,arg20;
+      var x,x1,x2,x3,x4,arg00,x5,arg001,shopsTab,x6,x7,arg002,x8,x9,xa,xb,patternInput,arg20;
       x=NavTab.Create("shops","Shops");
       x1=Table1.get_Empty();
-      arg00=List.ofArray(["#","Name","Location","Category"]);
-      x2=Table1.AddHeaders(arg00,x1);
+      x2=Table1.AddHeaders(List.ofArray(["#","Name","Location","Category"]),x1);
       x3=Table1.AddRowText(List.ofArray(["1","Waitrose","London","Supermarket"]),x2);
-      x4=Table1.AddRowText(List.ofArray(["2","Waitrose","London","Supermarket"]),x3);
-      x5=Table1.AddRowText(List.ofArray(["3","Waitrose","London","Supermarket"]),x4);
-      arg001=Table1.Render(Table1.AddRowText(List.ofArray(["4","Waitrose","London","Supermarket"]),x5));
-      x6=NavTab.AddContent(arg001,x);
-      arg002={
+      x4=Table1.AddRowText(List.ofArray(["2","Aldi","London","Supermarket"]),x3);
+      arg00=Table1.Render(Table1.AddRowText(List.ofArray(["3","Currys","London","Electronic"]),x4));
+      x5=NavTab.AddContent(arg00,x);
+      arg001={
        $:1
       };
-      shopsTab=NavTab.SetState(arg002,x6);
-      x7=NavTab.Create("expenses","Expenses");
-      x8=Table1.get_Empty();
-      arg003=List.ofArray(["#","Name","Location","Category","Price"]);
-      x9=Table1.AddHeaders(arg003,x8);
-      xa=Table1.AddRowText(List.ofArray(["1","Bread","London","Supermarket","$1"]),x9);
-      xb=Table1.AddRowText(List.ofArray(["2","Bread","London","Supermarket","$1"]),xa);
-      xc=Table1.AddRowText(List.ofArray(["3","Bread","London","Supermarket","$1"]),xb);
-      patternInput=NavTabs1.Render(NavTabs1.Create(List.ofArray([shopsTab,NavTab.AddContent(Table1.Render(Table1.AddRowText(List.ofArray(["4","Bread","London","Supermarket","$1"]),xc)),x7)])));
+      shopsTab=NavTab.SetState(arg001,x5);
+      x6=NavTab.Create("expenses","Expenses");
+      x7=Table1.get_Empty();
+      arg002=List.ofArray(["#","Name","Location","Category","Price"]);
+      x8=Table1.AddHeaders(arg002,x7);
+      x9=Table1.AddRowText(List.ofArray(["1","Bread","London","Supermarket","$1"]),x8);
+      xa=Table1.AddRowText(List.ofArray(["2","Coffee","London","Supermarket","$1"]),x9);
+      xb=Table1.AddRowText(List.ofArray(["3","c","London","Supermarket","$1"]),xa);
+      patternInput=NavTabs1.Render(NavTabs1.Create(List.ofArray([shopsTab,NavTab.AddContent(Table1.Render(Table1.AddRowText(List.ofArray(["4","Bread","London","Supermarket","$1"]),xb)),x6)])));
       arg20=List.ofArray([patternInput[0],patternInput[1]]);
       return Doc.RunById("main",Doc.Element("div",[],arg20));
      })

@@ -20,9 +20,8 @@ module Main =
             Table.Empty
             |> Table.AddHeaders [ "#"; "Name"; "Location"; "Category" ]
             |> Table.AddRowText [ "1"; "Waitrose"; "London"; "Supermarket" ]
-            |> Table.AddRowText [ "2"; "Waitrose"; "London"; "Supermarket" ]
-            |> Table.AddRowText [ "3"; "Waitrose"; "London"; "Supermarket" ]
-            |> Table.AddRowText [ "4"; "Waitrose"; "London"; "Supermarket" ]
+            |> Table.AddRowText [ "2"; "Aldi"; "London"; "Supermarket" ]
+            |> Table.AddRowText [ "3"; "Currys"; "London"; "Electronic" ]
             |> Table.Render
 
         let shopsTab =
@@ -34,8 +33,8 @@ module Main =
             Table.Empty
             |> Table.AddHeaders [ "#"; "Name"; "Location"; "Category"; "Price" ]
             |> Table.AddRowText [ "1"; "Bread"; "London"; "Supermarket"; "$1" ]
-            |> Table.AddRowText [ "2"; "Bread"; "London"; "Supermarket"; "$1" ]
-            |> Table.AddRowText [ "3"; "Bread"; "London"; "Supermarket"; "$1" ]
+            |> Table.AddRowText [ "2"; "Coffee"; "London"; "Supermarket"; "$1" ]
+            |> Table.AddRowText [ "3"; "c"; "London"; "Supermarket"; "$1" ]
             |> Table.AddRowText [ "4"; "Bread"; "London"; "Supermarket"; "$1" ]
             |> Table.Render
 

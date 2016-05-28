@@ -103,24 +103,40 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseUrl_Android.cs" />
+    <Compile Include="BaseUrl.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\fonts\glyphicons-halflings-regular.eot" />
-    <AndroidAsset Include="Assets\fonts\glyphicons-halflings-regular.ttf" />
-    <AndroidAsset Include="Assets\fonts\glyphicons-halflings-regular.woff" />
-    <AndroidAsset Include="Assets\fonts\glyphicons-halflings-regular.woff2" />
-    <AndroidAsset Include="Assets\css\bootstrap.css.map" />
-    <AndroidAsset Include="Assets\css\bootstrap.min.css.map" />
-    <AndroidAsset Include="Assets\css\bootstrap-theme.css.map" />
-    <AndroidAsset Include="Assets\css\bootstrap-theme.min.css.map" />
-    <None Include="GettingStarted.Xamarin" />
-    <None Include="packages.config" />
+    <None Include="..\WebView.WebApp\css\bootstrap-theme.css.map">
+      <Link>Assets\css\bootstrap-theme.css.map</Link>
+    </None>
+    <None Include="..\WebView.WebApp\css\bootstrap-theme.min.css.map">
+      <Link>Assets\css\bootstrap-theme.min.css.map</Link>
+    </None>
+    <None Include="..\WebView.WebApp\css\bootstrap.css.map">
+      <Link>Assets\css\bootstrap.css.map</Link>
+    </None>
+    <None Include="..\WebView.WebApp\css\bootstrap.min.css.map">
+      <Link>Assets\css\bootstrap.min.css.map</Link>
+    </None>
+    <None Include="..\WebView.WebApp\fonts\glyphicons-halflings-regular.eot">
+      <Link>Assets\fonts\glyphicons-halflings-regular.eot</Link>
+    </None>
+    <None Include="..\WebView.WebApp\fonts\glyphicons-halflings-regular.ttf">
+      <Link>Assets\fonts\glyphicons-halflings-regular.ttf</Link>
+    </None>
+    <None Include="..\WebView.WebApp\fonts\glyphicons-halflings-regular.woff">
+      <Link>Assets\fonts\glyphicons-halflings-regular.woff</Link>
+    </None>
+    <None Include="..\WebView.WebApp\fonts\glyphicons-halflings-regular.woff2">
+      <Link>Assets\fonts\glyphicons-halflings-regular.woff2</Link>
+    </None>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Resources\AboutResources.txt" />
-    <None Include="Assets\AboutAssets.txt" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml" />
@@ -135,58 +151,54 @@
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WebView.Mobile.Core\WebView.Mobile.Core.fsproj">
-      <Project>{81600ca4-5c62-4cba-a53b-acc68fb4a5ae}</Project>
-      <Name>WebView.Mobile.Core</Name>
+    <Content Include="..\WebView.WebApp\Content\WebView.WebApp.css">
+      <Link>Assets\Content\WebView.WebApp.css</Link>
+    </Content>
+    <Content Include="..\WebView.WebApp\Content\WebView.WebApp.head.html">
+      <Link>Assets\Content\WebView.WebApp.head.html</Link>
+    </Content>
+    <Content Include="..\WebView.WebApp\Content\WebView.WebApp.head.js">
+      <Link>Assets\Content\WebView.WebApp.head.js</Link>
+    </Content>
+    <Content Include="..\WebView.WebApp\Content\WebView.WebApp.js">
+      <Link>Assets\Content\WebView.WebApp.js</Link>
+    </Content>
+    <Content Include="..\WebView.WebApp\Content\WebView.WebApp.min.js">
+      <Link>Assets\Content\WebView.WebApp.min.js</Link>
+    </Content>
+    <Content Include="..\WebView.WebApp\css\bootstrap-theme.css">
+      <Link>Assets\css\bootstrap-theme.css</Link>
+    </Content>
+    <Content Include="..\WebView.WebApp\css\bootstrap-theme.min.css">
+      <Link>Assets\css\bootstrap-theme.min.css</Link>
+    </Content>
+    <Content Include="..\WebView.WebApp\css\bootstrap.css">
+      <Link>Assets\css\bootstrap.css</Link>
+    </Content>
+    <Content Include="..\WebView.WebApp\css\bootstrap.min.css">
+      <Link>Assets\css\bootstrap.min.css</Link>
+    </Content>
+    <Content Include="..\WebView.WebApp\fonts\glyphicons-halflings-regular.svg">
+      <Link>Assets\fonts\glyphicons-halflings-regular.svg</Link>
+    </Content>
+    <Content Include="..\WebView.WebApp\js\bootstrap.js">
+      <Link>Assets\js\bootstrap.js</Link>
+    </Content>
+    <Content Include="..\WebView.WebApp\js\bootstrap.min.js">
+      <Link>Assets\js\bootstrap.min.js</Link>
+    </Content>
+    <Content Include="..\WebView.WebApp\js\jquery-1.12.4.min.js">
+      <Link>Assets\js\jquery-1.12.4.min.js</Link>
+    </Content>
+    <Content Include="..\WebView.WebApp\js\npm.js">
+      <Link>Assets\js\npm.js</Link>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WebView.Mobile\WebView.Mobile.fsproj">
+      <Project>{03dd84cb-c012-47fb-983b-ebd09ee230f0}</Project>
+      <Name>WebView.Mobile</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidAsset Include="Assets\index.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidAsset Include="Assets\js\bootstrap.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidAsset Include="Assets\js\bootstrap.min.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidAsset Include="Assets\js\jquery-1.12.4.min.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidAsset Include="Assets\js\npm.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidAsset Include="Assets\fonts\glyphicons-halflings-regular.svg" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidAsset Include="Assets\css\bootstrap.css" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidAsset Include="Assets\css\bootstrap.min.css" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidAsset Include="Assets\css\bootstrap-theme.css" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidAsset Include="Assets\css\bootstrap-theme.min.css" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidAsset Include="Assets\Content\test.css" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidAsset Include="Assets\Content\WebView.WebApp.css" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidAsset Include="Assets\Content\WebView.WebApp.head.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidAsset Include="Assets\Content\WebView.WebApp.head.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidAsset Include="Assets\Content\WebView.WebApp.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidAsset Include="Assets\Content\WebView.WebApp.min.js" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets')" />
