@@ -15,7 +15,7 @@ namespace WebView.Mobile.AndroidApp {
             base.OnCreate(bundle);
 
             Xamarin.Forms.Forms.Init(this, bundle);
-            LoadApplication(new WebView.CSharp.Test.App());
+            LoadApplication(new WebView.Mobile.App());
         }
     }
 }

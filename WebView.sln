@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebView.Mobile.AndroidApp",
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "WebView.Mobile", "WebView.Mobile\WebView.Mobile.fsproj", "{03DD84CB-C012-47FB-983B-EBD09EE230F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebView.CSharp.Test", "WebView.CSharp.Test\WebView.CSharp.Test.csproj", "{5ED6AAEC-B34E-4116-BA97-F54163DE290D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,10 +29,6 @@ Global
 		{03DD84CB-C012-47FB-983B-EBD09EE230F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03DD84CB-C012-47FB-983B-EBD09EE230F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03DD84CB-C012-47FB-983B-EBD09EE230F0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5ED6AAEC-B34E-4116-BA97-F54163DE290D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5ED6AAEC-B34E-4116-BA97-F54163DE290D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5ED6AAEC-B34E-4116-BA97-F54163DE290D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5ED6AAEC-B34E-4116-BA97-F54163DE290D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

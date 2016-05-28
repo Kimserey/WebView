@@ -8,7 +8,7 @@ open Xamarin.Forms
 type IBaseUrl =
     abstract member Get: unit -> string
         
-module View =
+module Core =
     let baseUrl =
         DependencyService.Get<IBaseUrl>().Get()
 
@@ -31,5 +31,22 @@ module View =
     """
     let webView = new WebView(Source = new HtmlWebViewSource(Html = html, BaseUrl = baseUrl))
 
+    let grid =
+        let backButton = new Button(Text = "Back")
+        backButton.Clicked.AddHandler(fun _ _ -> if webView.CanGoBack then webView.GoBack())
+        let nextButton = new Button(Text = "Next")
+        nextButton.Clicked.AddHandler(fun _ _ -> if webView.CanGoForward then webView.GoForward())
+
+        let g = new Grid()
+        g.RowDefinitions.Add(new RowDefinition(Height = GridLength.Auto))
+        g.RowDefinitions.Add(new RowDefinition(Height = new GridLength(300.)))
+        g.ColumnDefinitions.Add(new ColumnDefinition(Width = new GridLength(1., GridUnitType.Star)))
+        g.ColumnDefinitions.Add(new ColumnDefinition(Width = new GridLength(1., GridUnitType.Star)))
+        g.Children.Add(backButton, 0, 0)
+        g.Children.Add(nextButton, 1, 0)
+
+        g.Children.Add(webView, 0, 2, 1, 2)
+        g
+
 type App() = 
-    inherit Application(MainPage = new ContentPage(Content = View.webView))
+    inherit Application(MainPage = new ContentPage(Content = Core.grid))
