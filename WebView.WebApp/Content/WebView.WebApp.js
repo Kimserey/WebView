@@ -18244,7 +18244,7 @@ var JSON;JSON||(JSON={}),function(){"use strict";function i(n){return n<10?"0"+n
        $:1
       })]);
       xa=Table1.SetStyle(arg003,x9);
-      xb=Table1.AddRow(TableRow.Create(List.ofArray([Doc.TextNode("#"),Doc.TextNode("Name"),Doc.TextNode("Location"),Doc.TextNode("Category"),Doc.TextNode("Price")])),xa);
+      xb=Table1.AddHeaders(List.ofArray(["#","Name","Location","Category","Price"]),xa);
       xc=Table1.AddRow(TableRow.OnClick(function()
       {
        return Var1.Set(route,{

@@ -55,7 +55,7 @@ module Main =
         let expensesTable() =
             Table.Empty
             |> Table.SetStyle [ TableStyle.Hover; TableStyle.Striped ]
-            |> Table.AddRow (TableRow.Create [ text "#"; text "Name"; text "Location"; text "Category"; text "Price" ])
+            |> Table.AddHeaders [ "#"; "Name"; "Location"; "Category"; "Price" ]
             |> Table.AddRow (TableRow.Create [ text "1"; text "Bread"; text "London"; text "Supermarket"; text "$1" ]
                              |> TableRow.OnClick (fun () -> route.Value <- Expense "Bread"))
             |> Table.AddRow (TableRow.Create [ text "2"; text "Coffee"; text "London"; text "Supermarket"; text "$1" ])

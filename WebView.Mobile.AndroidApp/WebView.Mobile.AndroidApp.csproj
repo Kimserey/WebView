@@ -109,30 +109,30 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\WebView.WebApp\css\bootstrap-theme.css.map">
+    <AndroidAsset Include="..\WebView.WebApp\css\bootstrap-theme.css.map">
       <Link>Assets\css\bootstrap-theme.css.map</Link>
-    </None>
-    <None Include="..\WebView.WebApp\css\bootstrap-theme.min.css.map">
+    </AndroidAsset>
+    <AndroidAsset Include="..\WebView.WebApp\css\bootstrap-theme.min.css.map">
       <Link>Assets\css\bootstrap-theme.min.css.map</Link>
-    </None>
-    <None Include="..\WebView.WebApp\css\bootstrap.css.map">
+    </AndroidAsset>
+    <AndroidAsset Include="..\WebView.WebApp\css\bootstrap.css.map">
       <Link>Assets\css\bootstrap.css.map</Link>
-    </None>
-    <None Include="..\WebView.WebApp\css\bootstrap.min.css.map">
+    </AndroidAsset>
+    <AndroidAsset Include="..\WebView.WebApp\css\bootstrap.min.css.map">
       <Link>Assets\css\bootstrap.min.css.map</Link>
-    </None>
-    <None Include="..\WebView.WebApp\fonts\glyphicons-halflings-regular.eot">
+    </AndroidAsset>
+    <AndroidAsset Include="..\WebView.WebApp\fonts\glyphicons-halflings-regular.eot">
       <Link>Assets\fonts\glyphicons-halflings-regular.eot</Link>
-    </None>
-    <None Include="..\WebView.WebApp\fonts\glyphicons-halflings-regular.ttf">
+    </AndroidAsset>
+    <AndroidAsset Include="..\WebView.WebApp\fonts\glyphicons-halflings-regular.ttf">
       <Link>Assets\fonts\glyphicons-halflings-regular.ttf</Link>
-    </None>
-    <None Include="..\WebView.WebApp\fonts\glyphicons-halflings-regular.woff">
+    </AndroidAsset>
+    <AndroidAsset Include="..\WebView.WebApp\fonts\glyphicons-halflings-regular.woff">
       <Link>Assets\fonts\glyphicons-halflings-regular.woff</Link>
-    </None>
-    <None Include="..\WebView.WebApp\fonts\glyphicons-halflings-regular.woff2">
+    </AndroidAsset>
+    <AndroidAsset Include="..\WebView.WebApp\fonts\glyphicons-halflings-regular.woff2">
       <Link>Assets\fonts\glyphicons-halflings-regular.woff2</Link>
-    </None>
+    </AndroidAsset>
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -151,48 +151,48 @@
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\WebView.WebApp\Content\WebView.WebApp.css">
+    <AndroidAsset Include="..\WebView.WebApp\Content\WebView.WebApp.css">
       <Link>Assets\Content\WebView.WebApp.css</Link>
-    </Content>
-    <Content Include="..\WebView.WebApp\Content\WebView.WebApp.head.html">
+    </AndroidAsset>
+    <AndroidAsset Include="..\WebView.WebApp\Content\WebView.WebApp.head.html">
       <Link>Assets\Content\WebView.WebApp.head.html</Link>
-    </Content>
-    <Content Include="..\WebView.WebApp\Content\WebView.WebApp.head.js">
+    </AndroidAsset>
+    <AndroidAsset Include="..\WebView.WebApp\Content\WebView.WebApp.head.js">
       <Link>Assets\Content\WebView.WebApp.head.js</Link>
-    </Content>
-    <Content Include="..\WebView.WebApp\Content\WebView.WebApp.js">
+    </AndroidAsset>
+    <AndroidAsset Include="..\WebView.WebApp\Content\WebView.WebApp.js">
       <Link>Assets\Content\WebView.WebApp.js</Link>
-    </Content>
-    <Content Include="..\WebView.WebApp\Content\WebView.WebApp.min.js">
+    </AndroidAsset>
+    <AndroidAsset Include="..\WebView.WebApp\Content\WebView.WebApp.min.js">
       <Link>Assets\Content\WebView.WebApp.min.js</Link>
-    </Content>
-    <Content Include="..\WebView.WebApp\css\bootstrap-theme.css">
+    </AndroidAsset>
+    <AndroidAsset Include="..\WebView.WebApp\css\bootstrap-theme.css">
       <Link>Assets\css\bootstrap-theme.css</Link>
-    </Content>
-    <Content Include="..\WebView.WebApp\css\bootstrap-theme.min.css">
+    </AndroidAsset>
+    <AndroidAsset Include="..\WebView.WebApp\css\bootstrap-theme.min.css">
       <Link>Assets\css\bootstrap-theme.min.css</Link>
-    </Content>
-    <Content Include="..\WebView.WebApp\css\bootstrap.css">
+    </AndroidAsset>
+    <AndroidAsset Include="..\WebView.WebApp\css\bootstrap.css">
       <Link>Assets\css\bootstrap.css</Link>
-    </Content>
-    <Content Include="..\WebView.WebApp\css\bootstrap.min.css">
+    </AndroidAsset>
+    <AndroidAsset Include="..\WebView.WebApp\css\bootstrap.min.css">
       <Link>Assets\css\bootstrap.min.css</Link>
-    </Content>
-    <Content Include="..\WebView.WebApp\fonts\glyphicons-halflings-regular.svg">
+    </AndroidAsset>
+    <AndroidAsset Include="..\WebView.WebApp\fonts\glyphicons-halflings-regular.svg">
       <Link>Assets\fonts\glyphicons-halflings-regular.svg</Link>
-    </Content>
-    <Content Include="..\WebView.WebApp\js\bootstrap.js">
+    </AndroidAsset>
+    <AndroidAsset Include="..\WebView.WebApp\js\bootstrap.js">
       <Link>Assets\js\bootstrap.js</Link>
-    </Content>
-    <Content Include="..\WebView.WebApp\js\bootstrap.min.js">
+    </AndroidAsset>
+    <AndroidAsset Include="..\WebView.WebApp\js\bootstrap.min.js">
       <Link>Assets\js\bootstrap.min.js</Link>
-    </Content>
-    <Content Include="..\WebView.WebApp\js\jquery-1.12.4.min.js">
+    </AndroidAsset>
+    <AndroidAsset Include="..\WebView.WebApp\js\jquery-1.12.4.min.js">
       <Link>Assets\js\jquery-1.12.4.min.js</Link>
-    </Content>
-    <Content Include="..\WebView.WebApp\js\npm.js">
+    </AndroidAsset>
+    <AndroidAsset Include="..\WebView.WebApp\js\npm.js">
       <Link>Assets\js\npm.js</Link>
-    </Content>
+    </AndroidAsset>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WebView.CSharp.Test\WebView.CSharp.Test.csproj">
