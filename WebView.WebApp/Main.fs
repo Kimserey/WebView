@@ -10,20 +10,43 @@ open WebSharper.Resources
 open Bootstrap.Hyperlink
 open Bootstrap.NavTabs
 open Bootstrap.Table
+open WebSharper.Data
+open FSharp.Data
 
 [<JavaScript>]
 module Main =
 
+    type Endpoint =
+        | Shop of string
+        | Expense of string
+        | Listing
+
     let main =
-        
+
+        let route = 
+            RouteMap.Create 
+                (function 
+                 | Shop name    -> [ "shops"; name ] 
+                 | Expense name -> [ "expenses"; name ] 
+                 | Listing      -> [ "listing" ]) 
+                (function
+                 | [ "shops"; name ]    -> Shop name
+                 | [ "expenses"; name ] -> Expense name
+                 | _                    -> Listing)
+            |> RouteMap.Install
+
         let shopsTable() =
             Table.Empty
+            |> Table.SetStyle [ TableStyle.Hover; TableStyle.Striped ]
             |> Table.AddHeaders [ "#"; "Name"; "Location"; "Category" ]
-            |> Table.AddRowText [ "1"; "Waitrose"; "London"; "Supermarket" ]
-            |> Table.AddRowText [ "2"; "Aldi"; "London"; "Supermarket" ]
-            |> Table.AddRowText [ "3"; "Currys"; "London"; "Electronic" ]
+            |> Table.AddRow (TableRow.Create [ text "1"; text "Waitrose"; text "London"; text "Supermarket" ] 
+                             |> TableRow.OnClick (fun () -> route.Value <- Shop "Waitrose"))
+            |> Table.AddRow (TableRow.Create [ text "2"; text "Aldi"; text "London"; text "Supermarket" ]
+                             |> TableRow.OnClick (fun () -> route.Value <- Shop "Aldi"))
+            |> Table.AddRow (TableRow.Create [ text "3"; text "Currys"; text "London"; text "Electronic" ]
+                             |> TableRow.OnClick (fun () -> route.Value <- Shop "Currys"))
             |> Table.Render
-
+            
         let shopsTab =
             NavTab.Create("shops", "Shops")
             |> NavTab.AddContent(shopsTable())
@@ -31,9 +54,11 @@ module Main =
             
         let expensesTable() =
             Table.Empty
-            |> Table.AddHeaders [ "#"; "Name"; "Location"; "Category"; "Price" ]
-            |> Table.AddRowText [ "1"; "Bread"; "London"; "Supermarket"; "$1" ]
-            |> Table.AddRowText [ "2"; "Coffee"; "London"; "Supermarket"; "$1" ]
+            |> Table.SetStyle [ TableStyle.Hover; TableStyle.Striped ]
+            |> Table.AddRow (TableRow.Create [ text "#"; text "Name"; text "Location"; text "Category"; text "Price" ])
+            |> Table.AddRow (TableRow.Create [ text "1"; text "Bread"; text "London"; text "Supermarket"; text "$1" ]
+                             |> TableRow.OnClick (fun () -> route.Value <- Expense "Bread"))
+            |> Table.AddRow (TableRow.Create [ text "2"; text "Coffee"; text "London"; text "Supermarket"; text "$1" ])
             |> Table.Render
 
         let expensesTab =
@@ -44,5 +69,10 @@ module Main =
             NavTabs.Create [ shopsTab; expensesTab ]
             |> NavTabs.Render
         
-        div [ nav; content ]
+        route.View
+        |> Doc.BindView(fun endpoint ->
+            match endpoint with
+            | Shop name -> h1 [ text ("Shop " + name) ]
+            | Expense name -> h1 [ text ("Expense " + name) ]
+            | Listing -> div [ nav; content ])
         |> Doc.RunById "main"

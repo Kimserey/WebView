@@ -30,16 +30,10 @@ module Table =
         static member AddRow row (x: Table) =
             { x with Body = x.Body |> TableBody.AddRow row }
 
-        static member AddRowDoc rowData (x: Table) =
-            { x with Body = x.Body |> TableBody.AddRowDoc rowData }
+        static member AddRows rows (x: Table) =
+            (x, rows) ||> List.fold (fun table row -> table |> Table.AddRow row)
 
-        static member AddRowText rowData (x: Table) =
-            { x with Body = x.Body |> TableBody.AddRowText rowData }
-
-        static member AddRowTextWithStatus rowData status (x: Table) =
-            { x with Body = x.Body |> TableBody.AddRowTextWithStatus rowData status }
-        
-        static member AddStyle style (x:Table) =
+        static member SetStyle style (x:Table) =
             { x with Style = style }
 
         static member Render (x: Table) =
@@ -59,61 +53,32 @@ module Table =
             static member AddRow row (x: TableBody) =
                 { x with Rows = x.Rows @ [ row ] }
 
-            static member AddRowDoc rowData (x: TableBody) =
-                { x with Rows = x.Rows @ [ { Status = Normal; Data = rowData } ] }
-            
-            static member AddRowText rowData (x: TableBody) =
-                x |> TableBody.AddRowDoc (rowData |> List.map (fun i -> text i))
-
-            static member AddRowTextWithStatus rowData status x =
-                { x with Rows = x.Rows @ [ { Status = status;  Data = rowData |> List.map (fun i -> text i) } ] }
-
             static member Render (x: TableBody) =
                 tbodyAttr (match x.OnAfterRenderAction |> Option.map (fun action -> [ on.afterRender action ])  with Some x -> x | None -> [])
                           (x.Rows |> List.map TableRow.Render |> Seq.cast)
-
-    and TableStyle =
-    | Bordered
-    | Striped
-    | Hover
-        with
-            static member ToCssClass =
-                function
-                | Bordered -> "table-bordered"
-                | Striped  -> "table-striped"
-                | Hover    -> "table-hover"
-
     and TableRow = {
         Status: TableRowStatus
         Data: Doc list
+        OnClickAction: (unit -> unit) option
     } with
-        static member Empty =
+        static member Create data =
             { Status = TableRowStatus.Normal
-              Data = [] }
-
-        static member AddData data (x: TableRow) =
-            { x with Data = data }
+              Data = data
+              OnClickAction = None }
+        
+        static member OnClick action (x: TableRow) =
+            { x with OnClickAction = Some action } 
 
         static member SetStatus status (x: TableRow) =
             { x with Status = status }
 
         static member Render (x: TableRow) =
-            trAttr [ attr.``class`` (string x.Status) ] 
+            trAttr [ yield attr.``class`` (TableRowStatus.ToCssClass x.Status) 
+                     yield! match x.OnClickAction with Some action -> [ on.click(fun _ _ -> action()); attr.style "cursor:pointer;" ] | None -> [] ]
                    (x.Data |> List.map (fun d -> td [ d ] :> Doc))
 
-    and TableRowStatus =
-        | Normal
-        | Active
-        | Success
-        | Warning
-        | Danger
-        | Info
-        with 
-            override x.ToString() = 
-                match x with 
-                | Normal -> "" 
-                | Active -> "active" 
-                | Success -> "success" 
-                | Warning -> "warning" 
-                | Danger -> "danger" 
-                | Info -> "info" 
+    and TableStyle = Bordered | Striped | Hover
+        with static member ToCssClass = function Bordered -> "table-bordered" | Striped  -> "table-striped" | Hover    -> "table-hover"
+
+    and TableRowStatus = Normal | Active | Success | Warning | Danger | Info
+        with static member ToCssClass = function  Normal -> "" | Active -> "active" | Success -> "success" | Warning -> "warning" | Danger -> "danger" | Info -> "info" 

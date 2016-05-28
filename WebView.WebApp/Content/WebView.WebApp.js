@@ -15602,6 +15602,319 @@ var JSON;JSON||(JSON={}),function(){"use strict";function i(n){return n<10?"0"+n
 
 (function()
 {
+ var Global=this,Runtime=this.IntelliFactory.Runtime,Strings,Exception,Data,Pervasives,jQuery,Concurrency,IO,JSRuntime,Arrays,Operators,Array,Option,Unchecked,Guid,String,WBRuntime,List,JavaScript,Pervasives1;
+ Runtime.Define(Global,{
+  WebSharper:{
+   Data:{
+    IO:{
+     asyncReadTextAtRuntime:function(forFSI,defaultResolutionFolder,resolutionFolder,formatName,encodingStr,uri)
+     {
+      var arg00;
+      arg00=function(tupledArg)
+      {
+       var ok,ko,_arg5,l,patternInput,uri1,jsonp,settings,_,fn,value;
+       ok=tupledArg[0];
+       ko=tupledArg[1];
+       _arg5=tupledArg[2];
+       l=uri.toLowerCase();
+       patternInput=Strings.StartsWith(l,"jsonp|")?[uri.substring(6),true]:Strings.StartsWith(l,"json|")?[uri.substring(5),false]:[uri,false];
+       uri1=patternInput[0];
+       jsonp=patternInput[1];
+       settings={
+        dataType:"json",
+        success:function(data)
+        {
+         return ok(data);
+        },
+        error:function(_arg3,_arg4,err)
+        {
+         return ko(Exception.New1(err));
+        }
+       };
+       if(jsonp)
+        {
+         fn=Pervasives.randomFunctionName();
+         settings.dataType="jsonp";
+         settings.jsonp="prefix";
+         _=void(settings.jsonpCallback="jsonp"+fn);
+        }
+       else
+        {
+         _=null;
+        }
+       value=jQuery.ajax(uri1,settings);
+       return;
+      };
+      return Concurrency.FromContinuations(arg00);
+     },
+     asyncReadTextAtRuntimeWithDesignTimeRules:function(defaultResolutionFolder,resolutionFolder,formatName,encodingStr,uri)
+     {
+      return IO.asyncReadTextAtRuntime(false,defaultResolutionFolder,resolutionFolder,formatName,encodingStr,uri);
+     }
+    },
+    JSRuntime:{
+     GetArrayChildByTypeTag:function(value,cultureStr,tagCode)
+     {
+      var arr,x;
+      x=function()
+      {
+       return this;
+      };
+      arr=JSRuntime.GetArrayChildrenByTypeTag(value,cultureStr,tagCode,x);
+      return Arrays.length(arr)===1?Arrays.get(arr,0):Operators.FailWith("JSON mismatch: Expected single value, but found multiple.");
+     },
+     GetArrayChildrenByTypeTag:function(doc,cultureStr,tagCode,mapping)
+     {
+      var _,chooser,mapping1,array;
+      if(Array.isArray(doc))
+       {
+        chooser=function(value)
+        {
+         return JSRuntime.matchTag(tagCode,value);
+        };
+        mapping1=function(x)
+        {
+         return function()
+         {
+          return mapping.call(arguments[0]);
+         }(x);
+        };
+        array=Arrays.choose(chooser,doc);
+        _=Arrays.map(mapping1,array);
+       }
+      else
+       {
+        _=Operators.FailWith("JSON mismatch: Expected Array node");
+       }
+      return _;
+     },
+     TryGetArrayChildByTypeTag:function(doc,cultureStr,tagCode,mapping)
+     {
+      var arr;
+      arr=JSRuntime.GetArrayChildrenByTypeTag(doc,cultureStr,tagCode,mapping);
+      return Arrays.length(arr)===1?{
+       $:1,
+       $0:Arrays.get(arr,0)
+      }:Arrays.length(arr)===0?{
+       $:0
+      }:Operators.FailWith("JSON mismatch: Expected Array with single or no elements.");
+     },
+     TryGetValueByTypeTag:function(doc,cultureStr,tagCode,mapping)
+     {
+      var mapping1,option;
+      mapping1=function(x)
+      {
+       return function()
+       {
+        return mapping.call(arguments[0]);
+       }(x);
+      };
+      option=JSRuntime.matchTag(tagCode,doc);
+      return Option.map(mapping1,option);
+     },
+     matchTag:function(tagCode,value)
+     {
+      var _,_1,_2,_3,v;
+      if(value==null)
+       {
+        _={
+         $:0
+        };
+       }
+      else
+       {
+        if(Unchecked.Equals(typeof value,"boolean")?tagCode==="Boolean":false)
+         {
+          _1={
+           $:1,
+           $0:value
+          };
+         }
+        else
+         {
+          if(Unchecked.Equals(typeof value,"number")?tagCode==="Number":false)
+           {
+            _2={
+             $:1,
+             $0:value
+            };
+           }
+          else
+           {
+            if(Unchecked.Equals(typeof value,"string")?tagCode==="Number":false)
+             {
+              v=1*value;
+              _3=Global.isNaN(v)?{
+               $:0
+              }:{
+               $:1,
+               $0:v
+              };
+             }
+            else
+             {
+              _3=(Unchecked.Equals(typeof value,"string")?tagCode==="String":false)?{
+               $:1,
+               $0:value
+              }:(Array.isArray(value)?tagCode==="Array":false)?{
+               $:1,
+               $0:value
+              }:(Unchecked.Equals(typeof value,"object")?tagCode==="Record":false)?{
+               $:1,
+               $0:value
+              }:{
+               $:0
+              };
+             }
+            _2=_3;
+           }
+          _1=_2;
+         }
+        _=_1;
+       }
+      return _;
+     }
+    },
+    Pervasives:{
+     randomFunctionName:function()
+     {
+      var copyOfStruct;
+      copyOfStruct=Guid.NewGuid();
+      return Strings.ReplaceChar(String(copyOfStruct).toLowerCase(),45,95);
+     }
+    },
+    TxtRuntime:{
+     AsyncMap:function(comp,mapping)
+     {
+      return Concurrency.Delay(function()
+      {
+       return Concurrency.Bind(comp,function(_arg1)
+       {
+        return Concurrency.Return(function()
+        {
+         return mapping.call(arguments[0]);
+        }(_arg1));
+       });
+      });
+     }
+    },
+    Utils:{
+     HasProperty:function(x,prop)
+     {
+      var v;
+      v=x[prop];
+      return!Unchecked.Equals(typeof v,"undefined")?true:false;
+     }
+    },
+    WBRuntime:{
+     WorldBankRuntime:Runtime.Class({},{
+      AsyncGetIndicator:function(country,indicator)
+      {
+       return Concurrency.FromContinuations(function(tupledArg)
+       {
+        var ok,ko,_arg1,guid,wb,countryCode,url,value;
+        ok=tupledArg[0];
+        ko=tupledArg[1];
+        _arg1=tupledArg[2];
+        guid=Pervasives.randomFunctionName();
+        wb=country.Context;
+        countryCode=country.Code;
+        url=WBRuntime.worldBankUrl(wb,List.ofArray(["countries",countryCode,"indicators",indicator]),List.ofArray([["date","1900:2050"],["format","jsonp"]]));
+        value=jQuery.ajax({
+         url:url,
+         dataType:"jsonp",
+         jsonp:"prefix",
+         jsonpCallback:"jsonp"+guid,
+         error:function(jqXHR,textStatus,error)
+         {
+          return ko(Exception.New1(textStatus+error));
+         },
+         success:function(data)
+         {
+          var chooser,array,array1,res;
+          chooser=function(e)
+          {
+           return e.value==null?{
+            $:0
+           }:{
+            $:1,
+            $0:[e.date,e.value]
+           };
+          };
+          array=Arrays.get(data,1);
+          array1=Arrays.choose(chooser,array);
+          res=array1.slice().reverse();
+          return ok(Pervasives1.NewFromList(res));
+         }
+        });
+        return;
+       });
+      },
+      GetCountry:function(countries,code,name)
+      {
+       return{
+        Context:countries,
+        Code:code,
+        Name:name
+       };
+      },
+      GetIndicators:function(country)
+      {
+       return country;
+      }
+     }),
+     worldBankUrl:function(wb,functions,props)
+     {
+      var mapping,strings,mapping1,strings1;
+      mapping=function(m)
+      {
+       return"/"+Global.encodeURIComponent(m);
+      };
+      strings=List.map(mapping,functions);
+      mapping1=function(tupledArg)
+      {
+       var key,value;
+       key=tupledArg[0];
+       value=tupledArg[1];
+       return"&"+key+"="+Global.encodeURIComponent(value);
+      };
+      strings1=List.map(mapping1,props);
+      return wb.serviceUrl+"/"+Strings.concat("",strings)+"?per_page=1000"+Strings.concat("",strings1);
+     }
+    }
+   }
+  }
+ });
+ Runtime.OnInit(function()
+ {
+  Strings=Runtime.Safe(Global.WebSharper.Strings);
+  Exception=Runtime.Safe(Global.WebSharper.Exception);
+  Data=Runtime.Safe(Global.WebSharper.Data);
+  Pervasives=Runtime.Safe(Data.Pervasives);
+  jQuery=Runtime.Safe(Global.jQuery);
+  Concurrency=Runtime.Safe(Global.WebSharper.Concurrency);
+  IO=Runtime.Safe(Data.IO);
+  JSRuntime=Runtime.Safe(Data.JSRuntime);
+  Arrays=Runtime.Safe(Global.WebSharper.Arrays);
+  Operators=Runtime.Safe(Global.WebSharper.Operators);
+  Array=Runtime.Safe(Global.Array);
+  Option=Runtime.Safe(Global.WebSharper.Option);
+  Unchecked=Runtime.Safe(Global.WebSharper.Unchecked);
+  Guid=Runtime.Safe(Global.WebSharper.Guid);
+  String=Runtime.Safe(Global.String);
+  WBRuntime=Runtime.Safe(Data.WBRuntime);
+  List=Runtime.Safe(Global.WebSharper.List);
+  JavaScript=Runtime.Safe(Global.WebSharper.JavaScript);
+  return Pervasives1=Runtime.Safe(JavaScript.Pervasives);
+ });
+ Runtime.OnLoad(function()
+ {
+  return;
+ });
+}());
+
+(function()
+{
  var Global=this,Runtime=this.IntelliFactory.Runtime,Unchecked,Seq,Option,Control,Disposable,Arrays,FSharpEvent,Util,Event,Event1,Collections,ResizeArray,ResizeArrayProxy,EventModule,HotStream,HotStream1,Concurrency,Operators,TimeoutException,setTimeout,clearTimeout,LinkedList,T,MailboxProcessor,Observable,Observer,Ref,Observable1,List,T1,Observer1;
  Runtime.Define(Global,{
   WebSharper:{
@@ -17095,7 +17408,7 @@ var JSON;JSON||(JSON={}),function(){"use strict";function i(n){return n<10?"0"+n
 ;
 (function()
 {
- var Global=this,Runtime=this.IntelliFactory.Runtime,UI,Next,AttrProxy,WebView,WebApp,Bootstrap,Hyperlink,Hyperlink1,List,Doc,T,Seq,AttrModule,PrintfHelpers,Unchecked,Strings,Common,Option,NavTabs,NavTab,NavTabs1,Table,Table1,TableBody,TableStyle,TableRow,TableRowStatus,Main;
+ var Global=this,Runtime=this.IntelliFactory.Runtime,UI,Next,AttrProxy,WebView,WebApp,Bootstrap,Hyperlink,Hyperlink1,List,Doc,T,Seq,AttrModule,PrintfHelpers,Unchecked,Strings,Common,Option,NavTabs,NavTab,NavTabs1,Table,Table1,TableBody,TableStyle,TableRow,TableRowStatus,RouteMap,Var1,Main;
  Runtime.Define(Global,{
   WebView:{
    WebApp:{
@@ -17193,9 +17506,8 @@ var JSON;JSON||(JSON={}),function(){"use strict";function i(n){return n<10?"0"+n
       },{
        AddClasses:function(cls,x)
        {
-        var list,CssClass;
-        list=List.append(x.CssClass,cls);
-        CssClass=List.distinct(list);
+        var CssClass;
+        CssClass=List.append(x.CssClass,cls);
         return Runtime.New(Hyperlink1,{
          Action:x.Action,
          Content:x.Content,
@@ -17311,13 +17623,13 @@ var JSON;JSON||(JSON={}),function(){"use strict";function i(n){return n<10?"0"+n
        {
         var arg10;
         arg10=Hyperlink1.Create(action);
-        return Hyperlink1.AddTextContent(content,arg10);
+        return Hyperlink1.AddContent(content,arg10);
        },
        Create2:function(action,content)
        {
         var arg10;
         arg10=Hyperlink1.Create(action);
-        return Hyperlink1.AddContent(content,arg10);
+        return Hyperlink1.AddTextContent(content,arg10);
        },
        Render:function(x)
        {
@@ -17482,7 +17794,16 @@ var JSON;JSON||(JSON={}),function(){"use strict";function i(n){return n<10?"0"+n
          }
         });
        },
-       Create1:function(id,title,content)
+       Create1:function(id,title,state)
+       {
+        return Runtime.New(NavTab,{
+         Id:id,
+         Title:title,
+         Content:Doc.get_Empty(),
+         NavTabState:state
+        });
+       },
+       Create2:function(id,title,content)
        {
         return Runtime.New(NavTab,{
          Id:id,
@@ -17491,15 +17812,6 @@ var JSON;JSON||(JSON={}),function(){"use strict";function i(n){return n<10?"0"+n
          NavTabState:{
           $:0
          }
-        });
-       },
-       Create2:function(id,title,state)
-       {
-        return Runtime.New(NavTab,{
-         Id:id,
-         Title:title,
-         Content:Doc.get_Empty(),
-         NavTabState:state
         });
        },
        Create3:function(id,title,content,state)
@@ -17525,7 +17837,7 @@ var JSON;JSON||(JSON={}),function(){"use strict";function i(n){return n<10?"0"+n
         matchValue1=x.NavTabState;
         if(matchValue1.$==2)
          {
-          _=Hyperlink1.Create1({
+          _=Hyperlink1.Create2({
            $:0,
            $0:"#"
           },x.Title);
@@ -17533,7 +17845,7 @@ var JSON;JSON||(JSON={}),function(){"use strict";function i(n){return n<10?"0"+n
         else
          {
           arg0="#"+x.Id;
-          _=Hyperlink1.Create1({
+          _=Hyperlink1.Create2({
            $:0,
            $0:arg0
           },x.Title).WithRole("tab").WithDataToggle("tab");
@@ -17624,46 +17936,17 @@ var JSON;JSON||(JSON={}),function(){"use strict";function i(n){return n<10?"0"+n
          Style:x.Style
         });
        },
-       AddRowDoc:function(rowData,x)
+       AddRows:function(rows,x)
        {
-        var arg10,Body;
-        arg10=x.Body;
-        Body=TableBody.AddRowDoc(rowData,arg10);
-        return Runtime.New(Table1,{
-         Headers:x.Headers,
-         Body:Body,
-         Style:x.Style
-        });
-       },
-       AddRowText:function(rowData,x)
-       {
-        var arg10,Body;
-        arg10=x.Body;
-        Body=TableBody.AddRowText(rowData,arg10);
-        return Runtime.New(Table1,{
-         Headers:x.Headers,
-         Body:Body,
-         Style:x.Style
-        });
-       },
-       AddRowTextWithStatus:function(rowData,status,x)
-       {
-        var arg20,Body;
-        arg20=x.Body;
-        Body=TableBody.AddRowTextWithStatus(rowData,status,arg20);
-        return Runtime.New(Table1,{
-         Headers:x.Headers,
-         Body:Body,
-         Style:x.Style
-        });
-       },
-       AddStyle:function(style,x)
-       {
-        return Runtime.New(Table1,{
-         Headers:x.Headers,
-         Body:x.Body,
-         Style:style
-        });
+        var folder;
+        folder=function(table)
+        {
+         return function(row)
+         {
+          return Table1.AddRow(row,table);
+         };
+        };
+        return Seq.fold(folder,x,rows);
        },
        OnAfterRenderBody:function(action,x)
        {
@@ -17726,6 +18009,14 @@ var JSON;JSON||(JSON={}),function(){"use strict";function i(n){return n<10?"0"+n
          }));
         })))]));
        },
+       SetStyle:function(style,x)
+       {
+        return Runtime.New(Table1,{
+         Headers:x.Headers,
+         Body:x.Body,
+         Style:style
+        });
+       },
        get_Empty:function()
        {
         return Runtime.New(Table1,{
@@ -17744,43 +18035,6 @@ var JSON;JSON||(JSON={}),function(){"use strict";function i(n){return n<10?"0"+n
        {
         return Runtime.New(TableBody,{
          Rows:List.append(x.Rows,List.ofArray([row])),
-         OnAfterRenderAction:x.OnAfterRenderAction
-        });
-       },
-       AddRowDoc:function(rowData,x)
-       {
-        return Runtime.New(TableBody,{
-         Rows:List.append(x.Rows,List.ofArray([Runtime.New(TableRow,{
-          Status:Runtime.New(TableRowStatus,{
-           $:0
-          }),
-          Data:rowData
-         })])),
-         OnAfterRenderAction:x.OnAfterRenderAction
-        });
-       },
-       AddRowText:function(rowData,x)
-       {
-        var mapping,arg00;
-        mapping=function(i)
-        {
-         return Doc.TextNode(i);
-        };
-        arg00=List.map(mapping,rowData);
-        return TableBody.AddRowDoc(arg00,x);
-       },
-       AddRowTextWithStatus:function(rowData,status,x)
-       {
-        var mapping;
-        mapping=function(i)
-        {
-         return Doc.TextNode(i);
-        };
-        return Runtime.New(TableBody,{
-         Rows:List.append(x.Rows,List.ofArray([Runtime.New(TableRow,{
-          Status:status,
-          Data:List.map(mapping,rowData)
-         })])),
          OnAfterRenderAction:x.OnAfterRenderAction
         });
        },
@@ -17826,11 +18080,29 @@ var JSON;JSON||(JSON={}),function(){"use strict";function i(n){return n<10?"0"+n
        }
       }),
       TableRow:Runtime.Class({},{
-       AddData:function(data,x)
+       Create:function(data)
        {
         return Runtime.New(TableRow,{
+         Status:Runtime.New(TableRowStatus,{
+          $:0
+         }),
+         Data:data,
+         OnClickAction:{
+          $:0
+         }
+        });
+       },
+       OnClick:function(action,x)
+       {
+        var OnClickAction;
+        OnClickAction={
+         $:1,
+         $0:action
+        };
+        return Runtime.New(TableRow,{
          Status:x.Status,
-         Data:data
+         Data:x.Data,
+         OnClickAction:OnClickAction
         });
        },
        Render:function(x)
@@ -17843,31 +18115,49 @@ var JSON;JSON||(JSON={}),function(){"use strict";function i(n){return n<10?"0"+n
          return Doc.Element("td",[],arg20);
         };
         list=x.Data;
-        return Doc.Element("tr",List.ofArray([AttrProxy.Create("class",Global.String(x.Status))]),List.map(mapping,list));
+        return Doc.Element("tr",Seq.toList(Seq.delay(function()
+        {
+         return Seq.append([AttrProxy.Create("class",(TableRowStatus.get_ToCssClass())(x.Status))],Seq.delay(function()
+         {
+          var matchValue,_,action;
+          matchValue=x.OnClickAction;
+          if(matchValue.$==0)
+           {
+            _=Runtime.New(T,{
+             $:0
+            });
+           }
+          else
+           {
+            action=matchValue.$0;
+            _=List.ofArray([AttrModule.Handler("click",function()
+            {
+             return function()
+             {
+              return action(null);
+             };
+            }),AttrProxy.Create("style","cursor:pointer;")]);
+           }
+          return _;
+         }));
+        })),List.map(mapping,list));
        },
        SetStatus:function(status,x)
        {
         return Runtime.New(TableRow,{
          Status:status,
-         Data:x.Data
-        });
-       },
-       get_Empty:function()
-       {
-        return Runtime.New(TableRow,{
-         Status:Runtime.New(TableRowStatus,{
-          $:0
-         }),
-         Data:Runtime.New(T,{
-          $:0
-         })
+         Data:x.Data,
+         OnClickAction:x.OnClickAction
         });
        }
       }),
-      TableRowStatus:Runtime.Class({
-       toString:function()
+      TableRowStatus:Runtime.Class({},{
+       get_ToCssClass:function()
        {
-        return this.$==1?"active":this.$==2?"success":this.$==3?"warning":this.$==4?"danger":this.$==5?"info":"";
+        return function(_arg2)
+        {
+         return _arg2.$==1?"active":_arg2.$==2?"success":_arg2.$==3?"warning":_arg2.$==4?"danger":_arg2.$==5?"info":"";
+        };
        }
       }),
       TableStyle:Runtime.Class({},{
@@ -17884,25 +18174,113 @@ var JSON;JSON||(JSON={}),function(){"use strict";function i(n){return n<10?"0"+n
     Main:{
      main:Runtime.Field(function()
      {
-      var x,x1,x2,x3,x4,arg00,x5,arg001,shopsTab,x6,x7,x8,x9,patternInput,arg20;
-      x=NavTab.Create("shops","Shops");
-      x1=Table1.get_Empty();
-      x2=Table1.AddHeaders(List.ofArray(["#","Name","Location","Category"]),x1);
-      x3=Table1.AddRowText(List.ofArray(["1","Waitrose","London","Supermarket"]),x2);
-      x4=Table1.AddRowText(List.ofArray(["2","Aldi","London","Supermarket"]),x3);
-      arg00=Table1.Render(Table1.AddRowText(List.ofArray(["3","Currys","London","Electronic"]),x4));
-      x5=NavTab.AddContent(arg00,x);
-      arg001={
+      var x,route,x1,x2,arg00,x3,x4,x5,x6,arg001,x7,arg002,shopsTab,x8,x9,arg003,xa,xb,xc,arg004,expensesTab,xd,patternInput,nav,content,xe;
+      x=RouteMap.Create(function(_arg1)
+      {
+       return _arg1.$==1?List.ofArray(["expenses",_arg1.$0]):_arg1.$==2?List.ofArray(["listing"]):List.ofArray(["shops",_arg1.$0]);
+      },function(_arg2)
+      {
+       return _arg2.$==1?_arg2.$0==="shops"?_arg2.$1.$==1?_arg2.$1.$1.$==0?{
+        $:0,
+        $0:_arg2.$1.$0
+       }:{
+        $:2
+       }:{
+        $:2
+       }:_arg2.$0==="expenses"?_arg2.$1.$==1?_arg2.$1.$1.$==0?{
+        $:1,
+        $0:_arg2.$1.$0
+       }:{
+        $:2
+       }:{
+        $:2
+       }:{
+        $:2
+       }:{
+        $:2
+       };
+      });
+      route=RouteMap.Install(x);
+      x1=NavTab.Create("shops","Shops");
+      x2=Table1.get_Empty();
+      arg00=List.ofArray([Runtime.New(TableStyle,{
+       $:2
+      }),Runtime.New(TableStyle,{
+       $:1
+      })]);
+      x3=Table1.SetStyle(arg00,x2);
+      x4=Table1.AddHeaders(List.ofArray(["#","Name","Location","Category"]),x3);
+      x5=Table1.AddRow(TableRow.OnClick(function()
+      {
+       return Var1.Set(route,{
+        $:0,
+        $0:"Waitrose"
+       });
+      },TableRow.Create(List.ofArray([Doc.TextNode("1"),Doc.TextNode("Waitrose"),Doc.TextNode("London"),Doc.TextNode("Supermarket")]))),x4);
+      x6=Table1.AddRow(TableRow.OnClick(function()
+      {
+       return Var1.Set(route,{
+        $:0,
+        $0:"Aldi"
+       });
+      },TableRow.Create(List.ofArray([Doc.TextNode("2"),Doc.TextNode("Aldi"),Doc.TextNode("London"),Doc.TextNode("Supermarket")]))),x5);
+      arg001=Table1.Render(Table1.AddRow(TableRow.OnClick(function()
+      {
+       return Var1.Set(route,{
+        $:0,
+        $0:"Currys"
+       });
+      },TableRow.Create(List.ofArray([Doc.TextNode("3"),Doc.TextNode("Currys"),Doc.TextNode("London"),Doc.TextNode("Electronic")]))),x6));
+      x7=NavTab.AddContent(arg001,x1);
+      arg002={
        $:1
       };
-      shopsTab=NavTab.SetState(arg001,x5);
-      x6=NavTab.Create("expenses","Expenses");
-      x7=Table1.get_Empty();
-      x8=Table1.AddHeaders(List.ofArray(["#","Name","Location","Category","Price"]),x7);
-      x9=Table1.AddRowText(List.ofArray(["1","Bread","London","Supermarket","$1"]),x8);
-      patternInput=NavTabs1.Render(NavTabs1.Create(List.ofArray([shopsTab,NavTab.AddContent(Table1.Render(Table1.AddRowText(List.ofArray(["2","Coffee","London","Supermarket","$1"]),x9)),x6)])));
-      arg20=List.ofArray([patternInput[0],patternInput[1]]);
-      return Doc.RunById("main",Doc.Element("div",[],arg20));
+      shopsTab=NavTab.SetState(arg002,x7);
+      x8=NavTab.Create("expenses","Expenses");
+      x9=Table1.get_Empty();
+      arg003=List.ofArray([Runtime.New(TableStyle,{
+       $:2
+      }),Runtime.New(TableStyle,{
+       $:1
+      })]);
+      xa=Table1.SetStyle(arg003,x9);
+      xb=Table1.AddRow(TableRow.Create(List.ofArray([Doc.TextNode("#"),Doc.TextNode("Name"),Doc.TextNode("Location"),Doc.TextNode("Category"),Doc.TextNode("Price")])),xa);
+      xc=Table1.AddRow(TableRow.OnClick(function()
+      {
+       return Var1.Set(route,{
+        $:1,
+        $0:"Bread"
+       });
+      },TableRow.Create(List.ofArray([Doc.TextNode("1"),Doc.TextNode("Bread"),Doc.TextNode("London"),Doc.TextNode("Supermarket"),Doc.TextNode("$1")]))),xb);
+      arg004=Table1.Render(Table1.AddRow(TableRow.Create(List.ofArray([Doc.TextNode("2"),Doc.TextNode("Coffee"),Doc.TextNode("London"),Doc.TextNode("Supermarket"),Doc.TextNode("$1")])),xc));
+      expensesTab=NavTab.AddContent(arg004,x8);
+      xd=NavTabs1.Create(List.ofArray([shopsTab,expensesTab]));
+      patternInput=NavTabs1.Render(xd);
+      nav=patternInput[0];
+      content=patternInput[1];
+      xe=route.get_View();
+      return Doc.RunById("main",Doc.BindView(function(endpoint)
+      {
+       var arg20,arg201,arg202;
+       if(endpoint.$==1)
+        {
+         arg20=List.ofArray([Doc.TextNode("Expense "+endpoint.$0)]);
+         return Doc.Element("h1",[],arg20);
+        }
+       else
+        {
+         if(endpoint.$==2)
+          {
+           arg201=List.ofArray([nav,content]);
+           return Doc.Element("div",[],arg201);
+          }
+         else
+          {
+           arg202=List.ofArray([Doc.TextNode("Shop "+endpoint.$0)]);
+           return Doc.Element("h1",[],arg202);
+          }
+        }
+      },xe));
      })
     }
    }
@@ -17937,6 +18315,8 @@ var JSON;JSON||(JSON={}),function(){"use strict";function i(n){return n<10?"0"+n
   TableStyle=Runtime.Safe(Table.TableStyle);
   TableRow=Runtime.Safe(Table.TableRow);
   TableRowStatus=Runtime.Safe(Table.TableRowStatus);
+  RouteMap=Runtime.Safe(Next.RouteMap);
+  Var1=Runtime.Safe(Next.Var1);
   return Main=Runtime.Safe(WebApp.Main);
  });
  Runtime.OnLoad(function()

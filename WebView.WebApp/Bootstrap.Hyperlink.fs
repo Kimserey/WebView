@@ -81,7 +81,7 @@ module Hyperlink =
             { x with Content = Text content }
         
         static member AddClasses cls x = 
-            { x with CssClass = x.CssClass @ cls |> List.distinct }
+            { x with CssClass = x.CssClass @ cls }
 
         static member AddTarget target x =
             { x with Target = Some target }
