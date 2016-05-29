@@ -33,11 +33,11 @@ module Hyperlink =
 
         static member Create(action, content) =
             Hyperlink.Create action
-            |> Hyperlink.AddContent content
+            |> Hyperlink.SetContent content
 
         static member Create(action, content) =
             Hyperlink.Create action
-            |> Hyperlink.AddTextContent content
+            |> Hyperlink.SetTextContent content
 
         static member Render x =
             aAttr [ yield! (match x.Action with 
@@ -59,19 +59,19 @@ module Hyperlink =
                      | Content doc -> doc
                      | Text txt -> text txt) ]
 
-        static member AddId id (x: Hyperlink) = 
+        static member SetId id (x: Hyperlink) = 
             { x with Id = Some id }
         
-        static member AddContent content (x: Hyperlink) = 
+        static member SetContent content (x: Hyperlink) = 
             { x with Content = Content content }
         
-        static member AddTextContent content (x: Hyperlink) = 
+        static member SetTextContent content (x: Hyperlink) = 
             { x with Content = Text content }
         
-        static member AddClasses cls x = 
+        static member SetClasses cls x = 
             { x with CssClass = x.CssClass @ cls }
 
-        static member AddTarget target x =
+        static member SetTarget target x =
             { x with Target = Some target }
 
         static member SetRole role x =

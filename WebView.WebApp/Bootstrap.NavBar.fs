@@ -10,14 +10,28 @@ open WebSharper.Resources
 
 [<JavaScript; AutoOpen>]
 module NavBar =
+    
+    [<Direct "$('.navbar-collapse').collapse('hide');">]
+    let collapse() = X<unit> 
 
-    type NavBar = {
+    type NavBar<'Endpoint> = {
         Brand: NavBrand
-        LeftMenu: NavBarMenu
-        RightMenu: NavBarMenu 
+        LeftMenu: NavBarMenu<'Endpoint>
+        RightMenu: NavBarMenu<'Endpoint>
     } with
-        static member Render (activeLink: View<string>) (x: NavBar) =
-            navAttr [ attr.``class`` "navbar navbar-default navbar-fixed-top" ] 
+        static member Create brand =
+            { Brand = brand
+              LeftMenu = NavBarMenu<'Endpoint>.Create Left
+              RightMenu = NavBarMenu<'Endpoint>.Create Right }
+
+        static member SetLeftMenu menu x =
+            { x with LeftMenu = menu }
+
+        static member SetRightMenu menu x =
+            { x with RightMenu = menu }
+
+        static member Render activeLink x =
+            navAttr [ attr.``class`` "navbar navbar-default" ] 
                     [ divAttr [ attr.``class`` "container-fluid" ] 
                               [ divAttr 
                                     [ attr.``class`` "navbar-header" ] 
@@ -32,20 +46,44 @@ module NavBar =
                                       x.Brand |> NavBrand.Render ] 
                                 divAttr 
                                     [ attr.``class`` "collapse navbar-collapse"; attr.id "menu" ]
-                                    [ x.LeftMenu |> NavBarMenu.Render activeLink
-                                      x.RightMenu |> NavBarMenu.Render activeLink ] ] ]
+                                    [ x.LeftMenu |> NavBarMenu<'Endpoint>.Render activeLink
+                                      x.RightMenu |> NavBarMenu<'Endpoint>.Render activeLink ] ] ]
     
-    and NavBrand = NavBrand of Doc
-        with
-            static member Render (NavBrand doc) = doc
+    and NavBrand = {
+        Action: unit -> unit
+        Content: Doc
+    } with
+        static member Create action content =
+            { Action = action; Content = content }
+        
+        static member Render x =
+            Hyperlink.Create (Action (fun () -> x.Action(); collapse()))
+            |> Hyperlink.SetClasses [ "navbar-brand" ]
+            |> Hyperlink.SetContent x.Content
+            |> Hyperlink.Render
 
-    and NavBarMenu = {
+    and NavBarMenu<'Endpoint> = {
         Links: Hyperlink list
         Side: NavBarMenuSide
+        IsActiveLink: Hyperlink -> 'Endpoint -> bool
     } with
-        static member Render (activeLink: View<string>) (x: NavBarMenu) = 
+        static member Create side = 
+            { Links = []
+              Side = side
+              IsActiveLink = fun _ _ -> false }
+
+        static member AddLink (link: Hyperlink) x =
+            { x with Links = x.Links @ [ (match link.Action with Action act -> { link with Action = Action (fun () -> act(); collapse()) } | _ -> link) ] }
+            
+        static member AddLinks links x =
+            (x, links) ||> List.fold (fun x link -> x |> NavBarMenu<_>.AddLink link)
+
+        static member IsActive predicate x =
+            { x with IsActiveLink = predicate }
+
+        static member Render activeLink x = 
             let links = 
-                activeLink |> Doc.BindView(fun active -> x.Links |> List.map (fun link -> liAttr [ attr.style "display: none;"; attr.``class`` (if link.Id |> Option.isSome && link.Id.Value = active then "active" else "")  ] [ link |> Hyperlink.Render ] :> Doc) |> Doc.Concat) 
+                activeLink |> Doc.BindView(fun active -> x.Links |> List.map (fun link -> liAttr [ attr.``class`` (if x.IsActiveLink link active then "active" else "")   ] [ link |> Hyperlink.Render ] :> Doc) |> Doc.Concat) 
             
             ulAttr [ attr.``class`` (match x.Side with Left -> "nav navbar-nav" | Right -> "nav navbar-nav navbar-right") ] [ links ]
                 

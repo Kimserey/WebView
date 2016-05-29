@@ -24,7 +24,8 @@ module Core =
             <script src="js/bootstrap.min.js" type="text/javascript"></script>
         </head>
         <body>
-            <div id="main"></div>
+            <div id="nav"></div>
+            <div id="main" class="container-fluid"></div>
             <script type="text/javascript" src="Content/WebView.WebApp.min.js"></script>
         </body>
         </html>

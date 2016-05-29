@@ -22,6 +22,9 @@ module Main =
         | Expense of string
         | Listing
 
+    type Nav = NavBar<Endpoint>
+    type NavMenu = NavBarMenu<Endpoint>
+
     let main =
 
         let route = 
@@ -36,9 +39,27 @@ module Main =
                  | _                    -> Listing)
             |> RouteMap.Install
 
+        let navBar() =
+            let leftMenu =
+                NavMenu.Create Left 
+                |> NavMenu.AddLinks
+                    [ Hyperlink.Create(Action(fun () -> route.Value <- Listing), "Shops / Expenses")
+                      |> Hyperlink.SetId "listing"
+                      Hyperlink.Create(Action(fun () -> route.Value <- Shop "Waitrose"), "Waitrose")
+                      |> Hyperlink.SetId "shop-waitrose" ]
+                |> NavMenu.IsActive (fun link endpoint -> 
+                    match link.Id, endpoint with
+                    | Some "listing", Listing
+                    | Some "shop-waitrose", Shop "Waitrose"-> true
+                    | _ -> false)
+
+            Nav.Create (NavBrand.Create ignore (text "WebView test"))
+            |> Nav.SetLeftMenu leftMenu
+            |> Nav.Render route.View
+
         let shopsTable() =
             Table.Empty
-            |> Table.SetStyle [ TableStyle.Hover; TableStyle.Striped ]
+            |> Table.SetStyle [ TableStyle.Hover; TableStyle.Striped; TableStyle.Bordered ]
             |> Table.AddHeaders [ "#"; "Name"; "Location"; "Category" ]
             |> Table.AddRow (TableRow.Create [ text "1"; text "Waitrose"; text "London"; text "Supermarket" ] 
                              |> TableRow.OnClick (fun () -> route.Value <- Shop "Waitrose"))
@@ -55,7 +76,7 @@ module Main =
             
         let expensesTable() =
             Table.Empty
-            |> Table.SetStyle [ TableStyle.Hover; TableStyle.Striped ]
+            |> Table.SetStyle [ TableStyle.Hover; TableStyle.Striped; TableStyle.Bordered ]
             |> Table.AddHeaders [ "#"; "Name"; "Location"; "Category"; "Price" ]
             |> Table.AddRow (TableRow.Create [ text "1"; text "Bread"; text "London"; text "Supermarket"; text "$1" ]
                              |> TableRow.OnClick (fun () -> route.Value <- Expense "Bread"))
@@ -70,6 +91,9 @@ module Main =
             NavTabs.Create [ shopsTab; expensesTab ]
             |> NavTabs.Render
         
+        navBar()
+        |> Doc.RunById "nav"
+
         route.View
         |> Doc.BindView(fun endpoint ->
             match endpoint with

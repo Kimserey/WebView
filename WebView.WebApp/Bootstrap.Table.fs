@@ -38,7 +38,7 @@ module Table =
 
         static member Render (x: Table) =
             divAttr 
-                [ attr.``class`` "table-responsive" ]
+                [ attr.``class`` "table-responsive"; attr.style "margin: 15px 0;" ]
                 [ tableAttr [ attr.``class`` ([ "table" ] @ (List.map TableStyle.ToCssClass x.Style) |> String.concat " ") ]
                             [ yield! match x.Headers |> Option.map (fun hs -> [ thead  [ tr (hs |> List.map (fun h -> th [ text h ] :> Doc)) ] :> Doc ]) with Some x -> x | None -> []
                               yield x.Body |> TableBody.Render :> Doc ] :> Doc ]
