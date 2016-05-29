@@ -59,18 +59,6 @@ module Hyperlink =
                      | Content doc -> doc
                      | Text txt -> text txt) ]
 
-        member x.Render() = 
-            Hyperlink.Render x
-        
-        member x.WithAriaLabel label = 
-            { x with AriaLabel = Some label }
-        
-        member x.WithRole role = 
-            { x with Role = Some role }
-        
-        member x.WithDataToggle toggle = 
-            { x with DataToggle = Some toggle }
-        
         static member AddId id (x: Hyperlink) = 
             { x with Id = Some id }
         
@@ -85,6 +73,12 @@ module Hyperlink =
 
         static member AddTarget target x =
             { x with Target = Some target }
+
+        static member SetRole role x =
+            { x with Role = Some role }
+
+        static member SetDataToggle d x =
+            { x with DataToggle = Some d}
     
     and HyperlinkAction =
         | Href of string

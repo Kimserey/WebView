@@ -9,6 +9,7 @@ open WebSharper.UI.Next.Client
 open WebSharper.Resources
 open Bootstrap.Hyperlink
 open Bootstrap.NavTabs
+open Bootstrap.NavBar
 open Bootstrap.Table
 open WebSharper.Data
 open FSharp.Data

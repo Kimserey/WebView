@@ -86,9 +86,9 @@ module NavTabs =
                    [ (match x.NavTabState with
                       | NavTabState.Disabled -> Hyperlink.Create(Href "#", x.Title)
                       | _ ->  Hyperlink.Create(Href <| "#" + x.Id, x.Title)
-                                       .WithRole("tab")
-                                       .WithDataToggle("tab")
-                      ).Render() ]
+                              |> Hyperlink.SetRole("tab")
+                              |> Hyperlink.SetDataToggle("tab"))
+                      |> Hyperlink.Render ]
 
         member x.RenderNavItem() = 
             NavTab.RenderNavItem x

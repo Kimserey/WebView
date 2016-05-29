@@ -17408,7 +17408,7 @@ var JSON;JSON||(JSON={}),function(){"use strict";function i(n){return n<10?"0"+n
 ;
 (function()
 {
- var Global=this,Runtime=this.IntelliFactory.Runtime,UI,Next,AttrProxy,WebView,WebApp,Bootstrap,Hyperlink,Hyperlink1,List,Doc,T,Seq,AttrModule,PrintfHelpers,Unchecked,Strings,Common,Option,NavTabs,NavTab,NavTabs1,Table,Table1,TableBody,TableStyle,TableRow,TableRowStatus,RouteMap,Var1,Main;
+ var Global=this,Runtime=this.IntelliFactory.Runtime,UI,Next,AttrProxy,List,WebView,WebApp,Bootstrap,Hyperlink,Hyperlink1,Doc,T,Seq,AttrModule,PrintfHelpers,Unchecked,Strings,Common,Option,NavBar,NavBrand,NavBarMenu,NavTabs,NavTab,NavTabs1,Table,Table1,TableBody,TableStyle,TableRow,TableRowStatus,RouteMap,Var1,Main;
  Runtime.Define(Global,{
   WebView:{
    WebApp:{
@@ -17444,66 +17444,7 @@ var JSON;JSON||(JSON={}),function(){"use strict";function i(n){return n<10?"0"+n
       }
      },
      Hyperlink:{
-      Hyperlink:Runtime.Class({
-       Render:function()
-       {
-        return Hyperlink1.Render(this);
-       },
-       WithAriaLabel:function(label)
-       {
-        var AriaLabel;
-        AriaLabel={
-         $:1,
-         $0:label
-        };
-        return Runtime.New(Hyperlink1,{
-         Action:this.Action,
-         Content:this.Content,
-         AriaLabel:AriaLabel,
-         Role:this.Role,
-         DataToggle:this.DataToggle,
-         Id:this.Id,
-         CssClass:this.CssClass,
-         Target:this.Target
-        });
-       },
-       WithDataToggle:function(toggle)
-       {
-        var DataToggle;
-        DataToggle={
-         $:1,
-         $0:toggle
-        };
-        return Runtime.New(Hyperlink1,{
-         Action:this.Action,
-         Content:this.Content,
-         AriaLabel:this.AriaLabel,
-         Role:this.Role,
-         DataToggle:DataToggle,
-         Id:this.Id,
-         CssClass:this.CssClass,
-         Target:this.Target
-        });
-       },
-       WithRole:function(role)
-       {
-        var Role;
-        Role={
-         $:1,
-         $0:role
-        };
-        return Runtime.New(Hyperlink1,{
-         Action:this.Action,
-         Content:this.Content,
-         AriaLabel:this.AriaLabel,
-         Role:Role,
-         DataToggle:this.DataToggle,
-         Id:this.Id,
-         CssClass:this.CssClass,
-         Target:this.Target
-        });
-       }
-      },{
+      Hyperlink:Runtime.Class({},{
        AddClasses:function(cls,x)
        {
         var CssClass;
@@ -17751,6 +17692,96 @@ var JSON;JSON||(JSON={}),function(){"use strict";function i(n){return n<10?"0"+n
           }));
          }));
         })),List.ofArray([_3]));
+       },
+       SetDataToggle:function(d,x)
+       {
+        var DataToggle;
+        DataToggle={
+         $:1,
+         $0:d
+        };
+        return Runtime.New(Hyperlink1,{
+         Action:x.Action,
+         Content:x.Content,
+         AriaLabel:x.AriaLabel,
+         Role:x.Role,
+         DataToggle:DataToggle,
+         Id:x.Id,
+         CssClass:x.CssClass,
+         Target:x.Target
+        });
+       },
+       SetRole:function(role,x)
+       {
+        var Role;
+        Role={
+         $:1,
+         $0:role
+        };
+        return Runtime.New(Hyperlink1,{
+         Action:x.Action,
+         Content:x.Content,
+         AriaLabel:x.AriaLabel,
+         Role:Role,
+         DataToggle:x.DataToggle,
+         Id:x.Id,
+         CssClass:x.CssClass,
+         Target:x.Target
+        });
+       }
+      })
+     },
+     NavBar:{
+      NavBar:Runtime.Class({},{
+       Render:function(activeLink,x)
+       {
+        var ats,ats1,ats2,ats3,arg00,arg10,arg101;
+        ats=List.ofArray([AttrProxy.Create("class","navbar navbar-default navbar-fixed-top")]);
+        ats1=List.ofArray([AttrProxy.Create("class","container-fluid")]);
+        ats2=List.ofArray([AttrProxy.Create("class","navbar-header")]);
+        ats3=List.ofArray([AttrProxy.Create("class","navbar-toggle collapsed"),Common["attr.dataToggle.Static"]("collapse"),Common["attr.dataTarget.Static"]("#menu"),Common["attr.ariaExpanded.Static"]("false")]);
+        arg00=x.Brand;
+        arg10=x.LeftMenu;
+        arg101=x.RightMenu;
+        return Doc.Element("nav",ats,List.ofArray([Doc.Element("div",ats1,List.ofArray([Doc.Element("div",ats2,List.ofArray([Doc.Element("button",ats3,List.ofArray([Doc.Element("span",List.ofArray([AttrProxy.Create("class","sr-only")]),Runtime.New(T,{
+         $:0
+        })),Doc.Element("span",List.ofArray([AttrProxy.Create("class","icon-bar")]),Runtime.New(T,{
+         $:0
+        })),Doc.Element("span",List.ofArray([AttrProxy.Create("class","icon-bar")]),Runtime.New(T,{
+         $:0
+        })),Doc.Element("span",List.ofArray([AttrProxy.Create("class","icon-bar")]),Runtime.New(T,{
+         $:0
+        }))])),NavBrand.Render(arg00)])),Doc.Element("div",List.ofArray([AttrProxy.Create("class","collapse navbar-collapse"),AttrProxy.Create("id","menu")]),List.ofArray([NavBarMenu.Render(activeLink,arg10),NavBarMenu.Render(activeLink,arg101)]))]))]));
+       }
+      }),
+      NavBarMenu:Runtime.Class({},{
+       Render:function(activeLink,x)
+       {
+        var _arg00_,links,matchValue;
+        _arg00_=function(active)
+        {
+         var x1,mapping,arg00;
+         x1=x.Links;
+         mapping=function(link)
+         {
+          var option;
+          option=link.Id;
+          return Doc.Element("li",List.ofArray([AttrProxy.Create("style","display: none;"),AttrProxy.Create("class",(option.$==1?link.Id.$0===active:false)?"active":"")]),List.ofArray([Hyperlink1.Render(link)]));
+         };
+         arg00=List.map(mapping,x1);
+         return Doc.Concat(arg00);
+        };
+        links=Doc.BindView(_arg00_,activeLink);
+        matchValue=x.Side;
+        return Doc.Element("ul",List.ofArray([AttrProxy.Create("class",matchValue.$==1?"nav navbar-nav navbar-right":"nav navbar-nav")]),List.ofArray([links]));
+       }
+      }),
+      NavBrand:Runtime.Class({},{
+       Render:function(_arg1)
+       {
+        var doc;
+        doc=_arg1.$0;
+        return doc;
        }
       })
      },
@@ -17831,7 +17862,7 @@ var JSON;JSON||(JSON={}),function(){"use strict";function i(n){return n<10?"0"+n
        },
        RenderNavItem:function(x)
        {
-        var ats,matchValue,matchValue1,_,arg0;
+        var ats,matchValue,matchValue1,arg00,_,arg10,arg0,arg101;
         matchValue=x.NavTabState;
         ats=List.ofArray([Common["attr.role.Static"]("presentation"),AttrProxy.Create("class",matchValue.$==1?"active":matchValue.$==2?"disabled":"")]);
         matchValue1=x.NavTabState;
@@ -17845,12 +17876,15 @@ var JSON;JSON||(JSON={}),function(){"use strict";function i(n){return n<10?"0"+n
         else
          {
           arg0="#"+x.Id;
-          _=Hyperlink1.Create2({
+          arg10=Hyperlink1.Create2({
            $:0,
            $0:arg0
-          },x.Title).WithRole("tab").WithDataToggle("tab");
+          },x.Title);
+          arg101=Hyperlink1.SetRole("tab",arg10);
+          _=Hyperlink1.SetDataToggle("tab",arg101);
          }
-        return Doc.Element("li",ats,List.ofArray([_.Render()]));
+        arg00=_;
+        return Doc.Element("li",ats,List.ofArray([Hyperlink1.Render(arg00)]));
        },
        SetState:function(state,x)
        {
@@ -17863,21 +17897,21 @@ var JSON;JSON||(JSON={}),function(){"use strict";function i(n){return n<10?"0"+n
        }
       }),
       NavTabs:Runtime.Class({},{
-       Create:function(tabs)
+       Create:function(tabs,navTabType)
+       {
+        return Runtime.New(NavTabs1,{
+         Tabs:tabs,
+         NavTabType:navTabType,
+         IsJustified:false
+        });
+       },
+       Create1:function(tabs)
        {
         return Runtime.New(NavTabs1,{
          Tabs:tabs,
          NavTabType:{
           $:0
          },
-         IsJustified:false
-        });
-       },
-       Create1:function(tabs,navTabType)
-       {
-        return Runtime.New(NavTabs1,{
-         Tabs:tabs,
-         NavTabType:navTabType,
          IsJustified:false
         });
        },
@@ -18254,7 +18288,7 @@ var JSON;JSON||(JSON={}),function(){"use strict";function i(n){return n<10?"0"+n
       },TableRow.Create(List.ofArray([Doc.TextNode("1"),Doc.TextNode("Bread"),Doc.TextNode("London"),Doc.TextNode("Supermarket"),Doc.TextNode("$1")]))),xb);
       arg004=Table1.Render(Table1.AddRow(TableRow.Create(List.ofArray([Doc.TextNode("2"),Doc.TextNode("Coffee"),Doc.TextNode("London"),Doc.TextNode("Supermarket"),Doc.TextNode("$1")])),xc));
       expensesTab=NavTab.AddContent(arg004,x8);
-      xd=NavTabs1.Create(List.ofArray([shopsTab,expensesTab]));
+      xd=NavTabs1.Create1(List.ofArray([shopsTab,expensesTab]));
       patternInput=NavTabs1.Render(xd);
       nav=patternInput[0];
       content=patternInput[1];
@@ -18291,12 +18325,12 @@ var JSON;JSON||(JSON={}),function(){"use strict";function i(n){return n<10?"0"+n
   UI=Runtime.Safe(Global.WebSharper.UI);
   Next=Runtime.Safe(UI.Next);
   AttrProxy=Runtime.Safe(Next.AttrProxy);
+  List=Runtime.Safe(Global.WebSharper.List);
   WebView=Runtime.Safe(Global.WebView);
   WebApp=Runtime.Safe(WebView.WebApp);
   Bootstrap=Runtime.Safe(WebApp.Bootstrap);
   Hyperlink=Runtime.Safe(Bootstrap.Hyperlink);
   Hyperlink1=Runtime.Safe(Hyperlink.Hyperlink);
-  List=Runtime.Safe(Global.WebSharper.List);
   Doc=Runtime.Safe(Next.Doc);
   T=Runtime.Safe(List.T);
   Seq=Runtime.Safe(Global.WebSharper.Seq);
@@ -18306,6 +18340,9 @@ var JSON;JSON||(JSON={}),function(){"use strict";function i(n){return n<10?"0"+n
   Strings=Runtime.Safe(Global.WebSharper.Strings);
   Common=Runtime.Safe(Bootstrap.Common);
   Option=Runtime.Safe(Global.WebSharper.Option);
+  NavBar=Runtime.Safe(Bootstrap.NavBar);
+  NavBrand=Runtime.Safe(NavBar.NavBrand);
+  NavBarMenu=Runtime.Safe(NavBar.NavBarMenu);
   NavTabs=Runtime.Safe(Bootstrap.NavTabs);
   NavTab=Runtime.Safe(NavTabs.NavTab);
   NavTabs1=Runtime.Safe(NavTabs.NavTabs);

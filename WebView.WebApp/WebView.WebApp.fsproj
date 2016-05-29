@@ -115,6 +115,7 @@
     <Compile Include="Global.asax.fs" />
     <Compile Include="Bootstrap.fs" />
     <Compile Include="Bootstrap.Hyperlink.fs" />
+    <Compile Include="Bootstrap.NavBar.fs" />
     <Compile Include="Bootstrap.NavTabs.fs" />
     <Compile Include="Bootstrap.Table.fs" />
     <Compile Include="Main.fs" />
